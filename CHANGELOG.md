@@ -12,8 +12,6 @@
 - **模板化**：剥离后端 → 迁移至 VitePress → 去 Minecraft 化 → 像素风格化
 - **当前定位**：通用像素风格 VitePress 主题/模板
 
----
-
 ### 第一阶段：后端剥离与静态化
 
 **分支：`template-cleanup`**
@@ -214,3 +212,49 @@
 | 主题色 | 红色 `#d84b4b`（`--pixel-brand*` 变量）|
 | 构建 | `npx vitepress build`，约 2.5s |
 | 输出 | 纯静态，无后端依赖 |
+
+---
+
+## pre-release2-1.0
+
+> 发布前准备：SEO 配置、性能优化、CI/CD 自动化部署、RSS 订阅支持。基于 `pre-release-1.0` 的模板完备化发布。
+
+#### Phase 26 — 项目占位修复 & SEO 配置
+- README/docs：`<仓库地址>` 占位符替换为实际 URL，目录名 `my-site` → `pixel-eco`，clone 命令简化
+- `config.ts`：添加 SEO meta（description/author/canonical）、Open Graph（og:type/title/description/url/image/site_name）、Twitter Card（summary card）
+- `config.ts`：启用 VitePress 内置 sitemap（`sitemap.hostname`），`base: '/pixel-eco/'`
+- `config.ts`：导航从英文（Home/News/About/Docs）改为中文（首页/新闻/关于/文档），注释改为英文
+- `package.json`：`name` 从 `pixel-eco-template` → `pixel-eco`
+- `LICENSE`：版权人 Leo Horie → Pixel Eco Contributors
+- `about.md`：移除 Discord/论坛占位 LinkCard，GitHub 链接指向实际仓库
+- `SiteFooter.vue`：Pixel Eco 链接指向实际仓库 URL
+- `news/*`：文章日期从 2025 更新至 2026
+
+#### Phase 27 — Monocraft TTF → woff2 字体优化
+- 安装 `ttf2woff2` 作为转换工具，编写 `scripts/convert-mono.mjs` 批量转换脚本
+- Monocraft 三文件（Regular/Bold/Italic）从 TTF 930KB 转为 woff2 169KB，缩减 **82%**
+- `fonts.css` 引用从 `format('truetype')` 更新为 `format('woff2')`
+- 移除旧 TTF 源文件（一次性转换工具和脚本保留在磁盘，不纳入版本控制）
+
+#### Phase 28 — 图片懒加载
+- `HomeIntro.vue` / `NewsCard.vue`：`<img>` 添加 `loading="lazy"`
+- `LinkCard.vue`：CSS `background-image` → 绝对定位 `<img>` + `object-fit: cover` + `loading="lazy"`，支持懒加载同时保持视觉一致
+
+#### Phase 29 — RSS 订阅支持
+- 安装社区插件 `vitepress-plugin-rss`（publisher atqq, v0.4.4）
+- `config.ts`：`SITE_ROOT` 常量分离（纯域名），RssPlugin 配置（title/baseUrl/copyright/filename/icon）
+- filter 仅收录 `frontmatter.category` 非空的新闻文章（构建输出 `/feed.rss`，含 2 篇）
+- `icon: false` 隐藏导航栏 RSS 图标（订阅仍可通过直接访问 `/feed.rss` 使用）
+
+#### Phase 30 — Dev 环境动态 base 路径
+- 开发时 `base: '/'`（直接从 `localhost:5173/` 访问），确保背景图路径正常
+- 构建时 `base: '/pixel-eco/'`（GitHub Pages 项目站点路径），不影响 sitemap/RSS URL
+- 通过 `process.argv[2] === 'dev'` 检测模式，避免 `NODE_ENV` 行为不可靠
+
+#### Phase 31 — CI/CD 自动部署
+- 创建 `.github/workflows/deploy.yml`：推送 main 分支 → checkout → npm ci → build → upload-pages-artifact → deploy-pages
+- 使用 GitHub Actions 原生部署方式（`actions/deploy-pages@v4`）
+- `docs/deployment.md` 简化：移除旧 YAML 代码块，引导用户去 Settings 开启
+
+#### Phase 32 — 社区动态日期修正
+- `news/community-update.md` 标题「2025 年 5 月」→「2026 年 6 月」，与 frontmatter `date: 2026-06-06` 保持一致
