@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitepress'
+import { RssPlugin } from 'vitepress-plugin-rss'
 
 // 站点基础信息
 // SITE_URL 用于 SEO 和社交媒体预览，确保它与你部署站点的 URL 匹配
 // SITE_URL 必须以斜杠结尾
 const SITE_URL = 'https://lylighte.github.io/pixel-eco/'
+const SITE_ROOT = 'https://lylighte.github.io'
 const SITE_TITLE = 'Pixel Eco - Template Demo'
 const SITE_DESCRIPTION = 'A pixel-styled portal template built with VitePress'
 
@@ -39,6 +41,18 @@ export default defineConfig({
   },
   markdown: {
     theme: 'github-dark',
+  },
+  vite: {
+    plugins: [
+      RssPlugin({
+        title: SITE_TITLE,
+        baseUrl: SITE_ROOT,
+        copyright: '© 2026-Present Pixel Eco. 保留所有权利。',
+        filename: 'feed.rss',
+        icon: true,
+        filter: (post) => post.frontmatter?.category,
+      }),
+    ],
   },
   themeConfig: {
     nav: [
