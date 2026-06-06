@@ -2,42 +2,28 @@ import { defineConfig } from 'vitepress'
 import { RssPlugin } from 'vitepress-plugin-rss'
 
 // ============================================================
-// 部署模式 — 选择一种
+// 基础配置
 // ============================================================
-// 'github-pages' — GitHub Pages 子路径部署
-// 'root'         — 根域名部署（自有域名 / Vercel / Netlify 等）
-// 'relative'     — 全部相对路径，dist 可随意移动（nginx 本地部署等）
-const DEPLOY_MODE: 'github-pages' | 'root' | 'relative' = 'github-pages'
-
-// GitHub 信息 — 用于 socialLinks 和 GitHub Pages 模式
 const GITHUB_USERNAME = 'Lylighte'
 const REPO_NAME = 'pixel-eco'
 
-// 根域名部署时需指定
-const CUSTOM_DOMAIN = 'example.com'
+// 部署基础路径
+// - 默认 './' 相对路径，dist 可随意移动，nginx 本地部署等
+// - CI 部署时通过环境变量 BASE_PATH 覆盖（如 /pixel-eco/）
+const BASE_PATH = process.env.BASE_PATH || './'
+const IS_RELATIVE = BASE_PATH === './'
 
-// ---- 以下自动推导 ----
 const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}`
 const IS_DEV = process.argv[2] === 'dev'
 
-let SITE_URL: string
-let BASE_PATH: string
-let RSS_BASE: string
+// 非 relative 模式下推导 SITE_URL（用于 SEO/OG/sitemap）
+// 可通过 SITE_URL 环境变量覆盖，否则按 GitHub Pages 惯例推导
+const SITE_URL = IS_RELATIVE
+  ? ''
+  : (process.env.SITE_URL || `https://${GITHUB_USERNAME}.github.io${BASE_PATH}`)
 
-if (DEPLOY_MODE === 'github-pages') {
-  SITE_URL = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/`
-  BASE_PATH = `/${REPO_NAME}/`
-  RSS_BASE = `https://${GITHUB_USERNAME}.github.io`
-} else if (DEPLOY_MODE === 'root') {
-  SITE_URL = `https://${CUSTOM_DOMAIN}/`
-  BASE_PATH = '/'
-  RSS_BASE = `https://${CUSTOM_DOMAIN}`
-} else {
-  // relative
-  SITE_URL = ''
-  BASE_PATH = './'
-  RSS_BASE = ''
-}
+// RSS baseUrl 只需域名，不含子路径（插件内部处理 base）
+const RSS_BASE = IS_RELATIVE ? '' : `https://${GITHUB_USERNAME}.github.io`
 
 const SITE_TITLE = 'Pixel Eco - Template Demo'
 const SITE_DESCRIPTION = 'A pixel-styled portal template built with VitePress'
@@ -46,9 +32,12 @@ export default defineConfig({
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: './logo.png' }],
+    // Favicon: relative 模式跳过（子页路径会解析错误），CI 绝对路径模式正常
+    ...(IS_RELATIVE ? [] : [
+      ['link', { rel: 'icon', type: 'image/png', href: `${BASE_PATH}logo.png` }],
+    ]),
 
-    // SEO
+    // SEO / Open Graph / Twitter Card — 仅在非 relative 模式启用
     ...(SITE_URL ? [
       ['meta', { name: 'description', content: SITE_DESCRIPTION }] as any,
       ['meta', { name: 'author', content: 'Pixel Eco Contributors' }] as any,
@@ -81,7 +70,7 @@ export default defineConfig({
         copyright: '© 2026-Present Pixel Eco. 保留所有权利。',
         filename: 'feed.rss',
         icon: false,
-        filter: (post) => post.frontmatter?.category,
+        filter: (post: any) => post.frontmatter?.category,
       })] : []),
     ],
   },

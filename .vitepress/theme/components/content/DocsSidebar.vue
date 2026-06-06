@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useRoute } from 'vitepress'
+import { useRoute, withBase } from 'vitepress'
 
 // 硬编码导航结构（与 docs/ 目录对应）
 // 若文档增多，可改为从 themeConfig.sidebar 读取
@@ -47,7 +47,7 @@ const isActive = (link: string) => {
           <a
             v-for="item in group.items"
             :key="item.link"
-            :href="item.link"
+            :href="withBase(item.link)"
             class="sidebar-item"
             :class="{ active: isActive(item.link) }"
           >

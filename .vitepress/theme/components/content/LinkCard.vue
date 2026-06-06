@@ -1,7 +1,7 @@
 <template>
   <a
     class="link-card"
-    :href="link.url"
+    :href="isExternal(link.url) ? link.url : withBase(link.url)"
     :target="isExternal(link.url) ? '_blank' : undefined"
     :rel="isExternal(link.url) ? 'noopener' : undefined"
   >
