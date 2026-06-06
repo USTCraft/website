@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
-import { useData, useRoute } from 'vitepress'
+import { useData, useRoute, withBase } from 'vitepress'
 
 const { theme } = useData()
 const route = useRoute()
@@ -70,7 +70,7 @@ const sliderStyle = computed(() => {
         v-for="(item, index) in navItems"
         :key="index"
         class="nav-item"
-        :href="item.url"
+        :href="withBase(item.url)"
         @click="soundOn($props.soundUrl)"
       >
         {{ item.name }}
