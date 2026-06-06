@@ -14,6 +14,17 @@ npm run build
 
 输出目录为 `.vitepress/dist/`，包含静态 HTML、CSS、JS 和资源文件，可直接用于部署。
 
+### 部署模式
+
+项目通过 `BASE_PATH` 环境变量区分两种模式：
+
+| 模式 | BASE_PATH | SEO / RSS | 适用场景 |
+|------|-----------|-----------|---------|
+| **relative**（默认） | 不设置 | 关闭 | 本地预览、Nginx 子目录 |
+| **absolute** | `/` 或 `/repo-name/` | 自动开启 | 自定义域名、GitHub Pages |
+
+GitHub Pages 用户无需手动设置——CI 工作流会自动注入。Netlify / Vercel 用户需在平台环境变量中设置 `BASE_PATH=/`。
+
 ## 本地预览
 
 ```bash
@@ -37,13 +48,15 @@ npm run preview
 1. 在 Netlify 中连接你的 Git 仓库
 2. 构建命令：`npm run build`
 3. 发布目录：`.vitepress/dist`
-4. 部署！
+4. 添加环境变量：`BASE_PATH` = `/`
+5. 部署！
 
 ## 部署到 Vercel
 
 1. 在 Vercel 中导入你的 Git 仓库
 2. 框架预设：**VitePress**
-3. Vercel 会自动检测构建设置 — 点击部署即可
+3. 添加环境变量：`BASE_PATH` = `/`
+4. Vercel 会自动检测构建设置 — 点击部署即可
 
 ## 自定义域名
 

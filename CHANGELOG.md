@@ -1,6 +1,36 @@
 # Changelog
 
-## pre-release-1.0
+## pre-release-2
+
+> 配置简化、CI 适配与路径修复。重构部署模式为环境变量驱动，修复 GitHub Pages 子路径部署全面崩溃。
+
+### 配置重构
+- **config.ts**: 三模式（github-pages/root/relative）简化为 `BASE_PATH` 环境变量单模式
+- **deploy.yml**: 改用 `actions/configure-pages@v4` 自动注入 `BASE_PATH`
+- **SEO/OG/RSS/Sitemap**: 条件启用——`BASE_PATH` 为绝对路径时自动开启，relative 模式跳过
+- **Favicon**: relative 模式跳过（子页路径解析错误），CI 绝对路径模式正常
+- **RSS baseUrl**: 独立为 `RSS_BASE` 变量，仅用域名避免路径重复
+
+### 路径修复
+- **BASE_PATH 尾部斜杠**: 强制补齐（`configure-pages@v4` 返回无斜杠，导致 favicon 路径拼接错误）
+- **Layout.vue**: 添加 `stripBase()` 剥离 base 前缀，修复 SSR 期间 `route.path` 含 base 前缀导致 ArticleView/DocsSidebar 不渲染
+- **NavBar.vue**: `stripBase()` 修复滑块错位；`soundUrl` 加 `withBase()` 修复音频 404
+- **DocsSidebar.vue**: 链接添加 `withBase()` 修复子页 404
+- **LinkCard.vue**: 区分外链/内链，内链使用 `withBase()`
+- **NewsCard.vue / ArticleView.vue**: 动态链接添加 `withBase()`
+- **PixelButton / PixelButton3D / PixelButtonClassic**: `soundUrl` 加 `withBase()`
+- **HomeHero.vue / HomeIntro.vue**: 动态 `:src` 绑定改为 `withBase()`
+- **DocsSidebar.vue**: 添加 `stripBase()` 修复高亮不生效（`route.path` 含 base 前缀与 `item.link` 不匹配）
+- **Layout.vue**: DocsSidebar 移出 `<Transition>`，修复切换文档页面时侧边栏跟随渐入动画
+
+### 文档更新
+- **customization.md**: 站点标识节重写，新增 `GITHUB_USERNAME`/`REPO_NAME`/`BASE_PATH`/`SITE_URL` 配置说明
+- **deployment.md**: 新增部署模式（relative/absolute）对比表，Netlify/Vercel 步骤补充 `BASE_PATH` 环境变量
+
+### 构建验证
+- relative 模式 + CI 模拟（`BASE_PATH=/pixel-eco/`）双模式 `npx vitepress build` 验证通过
+
+## pre-release-1
 
 > 面向用户的发布版本。基于原始社区门户 SPA 进行深度改造，最终成为独立于特定社区的通用像素风格模板。
 

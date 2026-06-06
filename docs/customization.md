@@ -8,14 +8,31 @@ layout: page
 
 ## 站点标识
 
-编辑 `.vitepress/config.ts`：
+编辑 `.vitepress/config.ts` 顶部的变量：
 
 ```ts
-export default defineConfig({
-  title: '我的站点',
-  description: '基于 VitePress 的像素风格站点',
-  // ...
-})
+const GITHUB_USERNAME = 'Lylighte'   // 替换为你的 GitHub 用户名
+const REPO_NAME = 'pixel-eco'        // 替换为你的仓库名
+```
+
+这两个变量会自动推导 GitHub Pages 地址、SEO 元标签和 RSS 订阅地址。
+
+### 部署路径
+
+`BASE_PATH` 环境变量控制站点部署的子路径：
+
+| 场景 | BASE_PATH | 说明 |
+|------|-----------|------|
+| 本地开发 | 不设置（默认 `./`） | 相对路径，可随意移动 dist |
+| GitHub Pages | CI 自动注入 | `configure-pages@v4` 自动设置 |
+| Netlify / Vercel | 设为 `/` | 根路径部署 |
+| 自定义域名 | 设为 `/` | 根路径部署 |
+
+非 relative 模式下（`BASE_PATH` 为绝对路径），SEO 元标签、Open Graph、Twitter Card、sitemap 和 RSS 会自动启用。可通过 `SITE_URL` 环境变量覆盖自动推导的站点地址。
+
+```ts
+// RSS 只需域名，不含子路径
+const RSS_BASE = IS_RELATIVE ? '' : `https://${GITHUB_USERNAME}.github.io`
 ```
 
 ## Logo

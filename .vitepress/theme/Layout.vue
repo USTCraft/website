@@ -50,14 +50,18 @@ const articleProps = computed(() => {
   <div class="pixel-layout">
     <NavBar />
     <main class="main-content">
-      <Transition name="page" mode="out-in">
-        <div v-if="isDocsPage" class="docs-layout" :key="route.path">
-          <DocsSidebar />
-          <div class="page-container vp-doc">
+      <!-- Docs: sidebar stays static, only content transitions -->
+      <div v-if="isDocsPage" class="docs-layout">
+        <DocsSidebar />
+        <Transition name="page" mode="out-in">
+          <div class="page-container vp-doc" :key="route.path">
             <Content />
           </div>
-        </div>
-        <ArticleView v-else-if="articleProps" v-bind="articleProps" :key="route.path">
+        </Transition>
+      </div>
+      <!-- Other pages: full transition -->
+      <Transition v-else name="page" mode="out-in">
+        <ArticleView v-if="articleProps" v-bind="articleProps" :key="route.path">
           <Content />
         </ArticleView>
         <div v-else class="page-container vp-doc" :class="{ 'with-hero': hasHero }" :key="route.path">

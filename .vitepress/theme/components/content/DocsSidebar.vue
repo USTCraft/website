@@ -1,6 +1,18 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useRoute, withBase } from 'vitepress'
+import { useData, useRoute, withBase } from 'vitepress'
+
+const { site } = useData()
+const route = useRoute()
+
+// VitePress SSR 期间 route.path 可能包含 base 前缀，手动剥离
+const stripBase = (path: string) => {
+  const base = site.value.base
+  if (base && base !== '/' && base !== './' && path.startsWith(base)) {
+    return path.slice(base.length - 1)
+  }
+  return path
+}
 
 // 硬编码导航结构（与 docs/ 目录对应）
 // 若文档增多，可改为从 themeConfig.sidebar 读取
@@ -22,7 +34,6 @@ const nav = [
   },
 ]
 
-const route = useRoute()
 const collapsed = ref<Record<string, boolean>>({})
 
 const toggle = (title: string) => {
@@ -30,7 +41,8 @@ const toggle = (title: string) => {
 }
 
 const isActive = (link: string) => {
-  return route.path === link || route.path === link + '.html'
+  const path = stripBase(route.path)
+  return path === link || path === link + '.html'
 }
 </script>
 
