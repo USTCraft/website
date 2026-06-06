@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════
+   Design Tokens — Three-Layer Architecture
+   Layer 1: Primitives (原始调色板)
+   Layer 2: Semantic Tokens (语义令牌)
+   Layer 3: Component Tokens (组件令牌)
+   ═══════════════════════════════════════════════════════════ */
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* ───────────────────────────────────────────
+     Layer 1: Primitives
+     ─────────────────────────────────────────── */
+  --pixel-brand: #d84b4b;
+  --pixel-brand-light: #e48181;
+  --pixel-brand-dark: #7e1b1b;
+  --pixel-gray-light: #747271;
+  --pixel-gray: #3d3938;
+  --pixel-gray-dark: #262524;
+  --pixel-dark: #171615;
+
+  /* ───────────────────────────────────────────
+     Layer 2: Semantic Tokens
+     ─────────────────────────────────────────── */
+  /* Colors */
+  --pixel-color-bg: var(--pixel-dark);
+  --pixel-color-bg-page: #0f0e0d;
+  --pixel-color-bg-card: #313131;
+  --pixel-color-bg-overlay: rgba(0, 0, 0, 0.7);
+  --pixel-color-bg-input: #616161;
+  --pixel-color-text: rgba(255, 255, 255, 0.9);
+  --pixel-color-text-muted: rgba(255, 255, 255, 0.8);
+  --pixel-color-text-inverse: #000;
+  --pixel-color-accent: var(--pixel-brand);
+  --pixel-color-accent-light: var(--pixel-brand-light);
+  --pixel-color-accent-dark: var(--pixel-brand-dark);
+  --pixel-color-accent-soft: rgba(216, 75, 75, 0.1);
+  --pixel-color-border: var(--pixel-gray);
+  --pixel-color-border-dark: #000;
+
+  /* Typography */
+  --pixel-font-heading: 'Ark Pixel', 'Unifont', monospace;
+  --pixel-font-code: 'Monocraft', 'Unifont', monospace;
+  --pixel-font-body: 'Unifont', monospace;
+  --pixel-font-size-s: 0.75rem;   /* 12px — 小字，锁定 Ark Pixel，禁用 Unifont */
+  --pixel-font-size-m: 1rem;      /* 16px — 正文，Unifont 绝对清晰 */
+  --pixel-font-size-l: 1.5rem;    /* 24px — 大标题，Ark Pixel 完美对齐 */
+  --pixel-font-size-xl: 2rem;     /* 32px — 装饰性大字，不保证像素对齐 */
+  --pixel-line-height: 1.7;
+
+  /* Spacing */
+  --pixel-space-xs: 0.25rem;
+  --pixel-space-s: 0.5rem;
+  --pixel-space-m: 1rem;
+  --pixel-space-l: 2rem;
+  --pixel-space-xl: 3rem;
+
+  /* Shadows */
+  --pixel-shadow-soft: 4px 4px rgba(0, 0, 0, 0.5);
+  --pixel-shadow-hard: 4px 4px rgba(0, 0, 0, 0.7);
+  --pixel-shadow-text: 2px 2px rgba(0, 0, 0, 0.5);
+
+  /* Borders */
+  --pixel-border: 2px solid var(--pixel-color-border);
+  --pixel-border-dark: 2px solid var(--pixel-color-border-dark);
+
+  /* Transitions */
+  --pixel-transition-fast: 0.1s ease-in-out;
+  --pixel-transition: 0.3s ease;
+  --pixel-transition-slow: 0.3s ease-in-out;
+
+  /* Misc */
+  --pixel-radius: 0;
+  --pixel-offset-3d: 12px;
+  --pixel-z-overlay: 512;
+  --pixel-z-nav: 1024;
+  --pixel-z-dialog: 2048;
+
+  /* ───────────────────────────────────────────
+     Layer 3: Component Tokens
+     ─────────────────────────────────────────── */
+  /* PixelButton — 3D bevel shadow colors */
+  --pixel-btn-shadow-light: rgba(255, 255, 255, 0.4);
+  --pixel-btn-shadow-dark: rgba(0, 0, 0, 0.4);
+  --pixel-btn-shadow-light-hover: var(--pixel-brand-light);
+  --pixel-btn-shadow-dark-hover: var(--pixel-brand-dark);
+
+  /* PixelButton */
+  --pixel-btn-bg: var(--pixel-color-accent);
+  --pixel-btn-bg-hover: var(--pixel-color-accent-light);
+  --pixel-btn-bg-base: #c6c6c6;
+  --pixel-btn-bg-dark: #303030;
+  --pixel-btn-bg-active: #8b8b8b;
+  --pixel-btn-text: var(--pixel-color-text-inverse);
+  --pixel-btn-text-hover: #fff;
+  --pixel-btn-border: var(--pixel-border-dark);
+  --pixel-btn-outline-dark: #333;
+  --pixel-btn-outline-hover: #fff;
+
+  /* PixelButtonClassic */
+  --pixel-btn-classic-bg: #999 url('/background/bgbtn.png') repeat;
+  --pixel-btn-classic-active-bg: rgba(100, 100, 255, 0.45);
+  --pixel-btn-classic-active-text: #ffffa0;
+  --pixel-btn-classic-active-shadow: 2px 2px #202013cc;
+  --pixel-btn-classic-text: #ddd;
+  --pixel-btn-classic-shadow: 2px 2px #000a;
+  --pixel-btn-classic-inset-dark: #0004;
+  --pixel-btn-classic-inset-dark-strong: #0006;
+  --pixel-btn-classic-inset-light: #fff5;
+  --pixel-btn-classic-inset-light-strong: #fff7;
+
+  /* PixelButton3D */
+  --pixel-btn-3d-offset: 12px;
+  --pixel-btn-3d-bg: #313233;
+  --pixel-btn-3d-border: rgba(0, 0, 0, 0.4);
+  --pixel-btn-3d-hover-overlay: #ffffff08;
+  --pixel-btn-3d-shadow-top: rgb(104, 104, 104);
+  --pixel-btn-3d-highlight: rgba(178, 178, 178, 0.5);
+  --pixel-btn-3d-shadow-bottom: rgba(153, 153, 153, 0.5);
+
+  /* PixelInput / PixelTextarea — recessed border */
+  --pixel-input-shadow-dark: #545454;
+  --pixel-input-shadow-light: #c6c6c6;
+
+  /* PixelInput / PixelTextarea */
+  --pixel-input-bg: var(--pixel-color-bg-input);
+  --pixel-input-border: var(--pixel-border-dark);
+  --pixel-input-text: #fff;
+  --pixel-input-disabled-text: #aaa;
+  --pixel-input-disabled-bg: #424242;
+
+  /* NavBar */
+  --pixel-nav-bg: rgba(0, 0, 0, 0.5);
+  --pixel-nav-border: var(--pixel-border);
+  --pixel-nav-shadow: var(--pixel-shadow-hard);
+  --pixel-nav-slider-bg: #c43030;
+  --pixel-nav-slider-border-top: #e06060;
+  --pixel-nav-slider-border-bottom: #8a1a1a;
+  --pixel-nav-item-text-hover: #fff;
+
+  /* PixelDialog / .pixel-border */
+  --pixel-dialog-overlay: var(--pixel-color-bg-overlay);
+  --pixel-dialog-bg: var(--pixel-color-bg-card);
+  --pixel-border-outer: #000;
+  --pixel-border-highlight: #fff;
+  --pixel-border-shadow: #555;
+  --pixel-border-fill: #c6c6c6;
+
+  /* Cards (BlogCard, LinkCard) */
+  --pixel-card-bg: var(--pixel-color-bg-card);
+  --pixel-card-shadow: var(--pixel-shadow-soft);
+  --pixel-linkcard-overlay-bg: rgba(0, 0, 0, 0.7);
+  --pixel-linkcard-title-color: #fff;
+
+  /* DocsSidebar */
+  --pixel-sidebar-bg: var(--pixel-color-bg-card);
+  --pixel-sidebar-border: var(--pixel-border);
+  --pixel-sidebar-active-bg: var(--pixel-color-accent-soft);
+  --pixel-sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+
+  /* HomeHero */
+  --pixel-hero-overlay: var(--pixel-color-bg-overlay);
+  --pixel-hero-gradient: linear-gradient(135deg, #7e1b1b 0%, #171615 50%, #d84b4b 100%);
+  --pixel-hero-title-color: #fff;
+  --pixel-hero-padding-inline: 5%;
+  --pixel-hero-content-width: 40%;
+  --pixel-hero-content-min-width: 25rem;
+
+  /* SiteFooter */
+  --pixel-footer-title: #fff;
+  --pixel-footer-text: #ddd;
+  --pixel-footer-border: #909399;
+  --pixel-footer-copyright: #999;
+  --pixel-footer-declaration: #aaa;
+
+  /* ArticleView */
+  --pixel-article-category-bg: rgba(0, 0, 0, 0.6);
+
+  /* ───────────────────────────────────────────
+     Backward compat aliases
+     ─────────────────────────────────────────── */
+  --background-color: var(--pixel-color-bg);
+  --background-page: var(--pixel-color-bg-page);
+  --background-card: var(--pixel-color-bg-card);
+  --btn-classic-bg: var(--pixel-btn-classic-bg);
+
+  /* ───────────────────────────────────────────
+     Base
+     ─────────────────────────────────────────── */
+  line-height: var(--pixel-line-height);
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  color-scheme: dark;
+  color: var(--pixel-color-text);
+  background-color: var(--pixel-color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+
+  /* ── VitePress default variable overrides ── */
+  --vp-c-bg: var(--pixel-color-bg);
+  --vp-c-bg-elv: var(--pixel-color-bg-card);
+  --vp-c-bg-soft: var(--pixel-color-bg-card);
+  --vp-c-text-1: var(--pixel-color-text);
+  --vp-c-text-2: rgba(255, 255, 255, 0.7);
+  --vp-c-border: #909399;
+  --vp-c-divider: var(--pixel-color-border);
+  --vp-c-brand-1: var(--pixel-color-accent-light);
+  --vp-c-brand-2: var(--pixel-color-accent);
+  --vp-c-brand-3: var(--pixel-color-accent-dark);
+  --vp-nav-bg-color: var(--pixel-nav-bg);
+  --vp-layout-max-width: 100%;
+
+  /* ── Code block dark background ── */
+  --vp-code-block-bg: #1a1a1c;
+  --vp-code-line-highlight-color: rgba(255, 255, 255, 0.05);
+  --vp-code-copy-code-bg: rgba(255, 255, 255, 0.06);
+  --vp-code-copy-code-hover-bg: rgba(255, 255, 255, 0.12);
+  --vp-code-tab-bg: #1a1a1c;
+  --vp-code-tab-text-color: rgba(255, 255, 255, 0.5);
+  --vp-code-lang-color: rgba(255, 255, 255, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ── Pixel Font Stack (global selectors → Layer 2) ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--pixel-font-heading);
+}
+
+h1 {
+  font-size: var(--pixel-font-size-l);   /* 24px — Ark Pixel 2× */
+}
+
+h2 {
+  font-size: 1.25rem;                     /* 20px — Ark/Mono 完美对齐 */
+}
+
+h3, h4, h5, h6 {
+  font-size: var(--pixel-font-size-m);   /* 16px — 与正文一致，通过颜色/间距区分 */
+}
+
+code, pre, kbd, samp {
+  font-family: var(--pixel-font-code);
+}
+
+body {
+  font-family: var(--pixel-font-body);
+  font-size: 16px;
+  line-height: var(--pixel-line-height);
+}
+
+.pixel-text {
+  font-family: var(--pixel-font-body);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* ── 演示区与代码块间距 ── */
+.vp-doc + div[class*='language-'] {
+  margin-top: 1.5rem;
+}
+
+/* ── 深色滚动条 ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pixel-color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-gray);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-gray-light);
+}
+
+/* ── Reduced motion (disabled by default; uncomment to respect OS preference)
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+*/
