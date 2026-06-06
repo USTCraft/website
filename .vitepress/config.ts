@@ -9,6 +9,8 @@ const SITE_ROOT = 'https://lylighte.github.io'
 const SITE_TITLE = 'Pixel Eco - Template Demo'
 const SITE_DESCRIPTION = 'A pixel-styled portal template built with VitePress'
 
+const IS_DEV = process.argv[2] === 'dev'
+
 export default defineConfig({
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
@@ -35,7 +37,7 @@ export default defineConfig({
     ['meta', { name: 'twitter:image', content: `${SITE_URL}logo.png` }],
   ],
   srcExclude: ['dev-notes/**', 'AGENTS.md', 'CHANGELOG.md', 'README.md', 'LICENSE'],
-  base: '/pixel-eco/',
+  base: IS_DEV ? '/' : '/pixel-eco/',
   sitemap: {
     hostname: SITE_URL,
   },
