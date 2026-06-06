@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { withBase } from 'vitepress'
+
 defineProps({
   title: { type: String, default: 'Your Organization' },
   subtitle: { type: String, default: '' },
@@ -12,7 +14,7 @@ defineProps({
   <div class="hero">
     <img
       v-if="$props.background"
-      :src="$props.background"
+      :src="withBase($props.background)"
       alt="hero"
       class="hero-image"
     />

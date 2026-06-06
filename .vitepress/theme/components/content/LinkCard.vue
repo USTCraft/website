@@ -7,7 +7,7 @@
   >
     <img
       v-if="link.image"
-      :src="link.image"
+      :src="withBase(link.image)"
       alt=""
       loading="lazy"
       class="link-bg"
@@ -20,6 +20,8 @@
 </template>
 
 <script lang="ts" setup>
+import { withBase } from 'vitepress'
+
 const isExternal = (url: string) => {
   return url.startsWith('http://') || url.startsWith('https://')
 }

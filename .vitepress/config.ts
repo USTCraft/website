@@ -15,7 +15,8 @@ export default defineConfig({
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/logo.png' }],
+    // 需与 base 配置保持同步
+    ['link', { rel: 'icon', type: 'image/png', href: '/pixel-eco/logo.png' }],
 
     // SEO
     ['meta', { name: 'description', content: SITE_DESCRIPTION }],

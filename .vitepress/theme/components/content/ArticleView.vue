@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { withBase } from 'vitepress'
+
 defineProps<{
   title?: string
   author?: { name: string; avatar: string; tags?: { text: string; color: string; bg: string }[] }
@@ -13,7 +15,7 @@ defineProps<{
   <article class="article-view">
     <!-- Cover -->
     <div v-if="cover" class="article-cover">
-      <img :src="cover" :alt="title" />
+      <img :src="withBase(cover)" :alt="title" />
       <div v-if="category" class="article-cover-category">{{ category }}</div>
     </div>
 

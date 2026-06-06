@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { withBase } from 'vitepress'
 import PixelButton3D from '../ui/PixelButton3D.vue'
 
 defineProps({
@@ -30,7 +31,7 @@ defineProps({
     <picture class="overview-picture">
       <img
         v-if="$props.image"
-        :src="$props.image"
+        :src="withBase($props.image)"
         :alt="$props.title"
         loading="lazy"
         class="overview-img"
