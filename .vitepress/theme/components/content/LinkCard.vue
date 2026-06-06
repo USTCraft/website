@@ -4,8 +4,14 @@
     :href="link.url"
     :target="isExternal(link.url) ? '_blank' : undefined"
     :rel="isExternal(link.url) ? 'noopener' : undefined"
-    :style="{ backgroundImage: link.image ? `url(${link.image})` : undefined }"
   >
+    <img
+      v-if="link.image"
+      :src="link.image"
+      alt=""
+      loading="lazy"
+      class="link-bg"
+    />
     <div class="link-content">
       <p>{{ link.name }}</p>
       <span v-if="link.description">{{ link.description }}</span>
@@ -39,8 +45,6 @@ defineProps<{
   border-left: 2px solid var(--pixel-brand);
   border-right: 2px solid var(--pixel-brand);
   border-bottom: 2px solid var(--pixel-brand-dark);
-  background-position: center;
-  background-size: cover;
   background-color: var(--pixel-card-bg);
   box-shadow: var(--pixel-card-shadow);
   cursor: pointer;
@@ -53,7 +57,18 @@ defineProps<{
   transform: scale(1.05);
 }
 
+.link-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 .link-content {
+  position: relative;
+  z-index: 1;
   margin-top: auto;
   padding: 0.5rem 1rem;
   background-color: var(--pixel-linkcard-overlay-bg);

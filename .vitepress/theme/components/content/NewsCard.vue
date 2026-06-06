@@ -32,6 +32,7 @@ defineProps({
         v-if="$props.image"
         :src="$props.image"
         :alt="$props.title"
+        loading="lazy"
         class="overview-img"
       />
     </picture>
