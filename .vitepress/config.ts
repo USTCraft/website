@@ -51,7 +51,7 @@ export default defineConfig({
         baseUrl: SITE_ROOT,
         copyright: '© 2026-Present Pixel Eco. 保留所有权利。',
         filename: 'feed.rss',
-        icon: true,
+        icon: false,
         filter: (post) => post.frontmatter?.category,
       }),
     ],
