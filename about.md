@@ -38,8 +38,6 @@ hasHero: true
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 3rem 0;">
 
-<LinkCard :link="{ name: 'GitHub', url: 'https://github.com', image: '/background/bgbtn.png', description: '浏览我们的开源项目，贡献代码。' }" />
-<LinkCard :link="{ name: 'Discord', url: '#', image: '/background/15.jpg', description: '加入社区聊天，参与实时讨论和活动。' }" />
-<LinkCard :link="{ name: '论坛', url: '#', image: '/background/44.jpg', description: '分享作品、发布教程，与其他创作者交流。' }" />
+<LinkCard :link="{ name: 'GitHub', url: 'https://github.com/Lylighte/pixel-eco', image: '/background/bgbtn.png', description: '浏览我们的开源项目，贡献代码。' }" />
 
 </div>

@@ -1,6 +1,6 @@
 ---
-title: 社区动态 — 2025 年 6 月
-date: 2025-06-15
+title: 社区动态 — 2025 年 5 月
+date: 2026-06-06
 author:
   name: 活动团队
   avatar: /background/15.jpg

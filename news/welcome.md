@@ -1,6 +1,6 @@
 ---
 title: 欢迎加入我们的社区
-date: 2025-06-01
+date: 2026-06-06
 author:
   name: 社区团队
   avatar: /background/44.jpg

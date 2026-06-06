@@ -14,10 +14,9 @@ layout: page
 ## 搭建步骤
 
 ```bash
-# 克隆模板
-# 将 <仓库地址> 替换为你的远程仓库 URL
-git clone -b template/vitepress <仓库地址> my-site
-cd my-site
+# 克隆仓库
+git clone https://github.com/Lylighte/pixel-eco.git
+cd pixel-eco
 
 # 安装依赖
 npm install
@@ -31,7 +30,7 @@ npm run dev
 ## 项目结构
 
 ```
-my-site/
+pixel-eco/
 ├── .vitepress/
 │   ├── config.ts              # 站点配置（标题、导航等）
 │   └── theme/
