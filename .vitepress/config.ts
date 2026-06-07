@@ -9,11 +9,11 @@ const REPO_NAME = 'pixel-eco'
 
 // 部署基础路径
 // - Dev 模式强制 '/'（避免相对路径导航嵌套 bug）
-// - 默认 './' 相对路径，dist 可随意移动，nginx 本地部署等
+// - 默认 '/'，本地开发、预览、根路径部署均正常
 // - CI 部署时通过环境变量 BASE_PATH 覆盖（如 /pixel-eco/）
 // - configure-pages@v4 返回无尾部斜杠，此处强制补齐
 const IS_DEV = process.argv[2] === 'dev'
-const BASE_PATH = IS_DEV ? '/' : (process.env.BASE_PATH || './').replace(/\/?$/, '/')
+const BASE_PATH = IS_DEV ? '/' : (process.env.BASE_PATH || '/').replace(/\/?$/, '/')
 const IS_RELATIVE = BASE_PATH === './'
 
 const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}`

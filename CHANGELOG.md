@@ -2,7 +2,7 @@
 
 ## Dev 1.0.2
 
-> 2026/06/07: 内容文件迁移至 `src/` 目录，利用 VitePress `srcDir` 实现内容与配置分离。
+> 2026/06/07: 内容文件迁移至 `src/` 目录，利用 VitePress `srcDir` 实现内容与配置分离。修复 dev/preview 模式路径问题。
 
 ### 项目结构重构
 - **srcDir 迁移**：`index.md`、`about.md`、`404.md`、`news/`、`docs/` 统一移入 `src/`
@@ -10,10 +10,11 @@
 - **config.ts**：添加 `srcDir: 'src'`
 - **README.md**：结构树同步更新，内容路径改为 `src/` 前缀
 - **quick-start.md**：结构树同步更新
-- 双模式构建验证通过（relative + absolute）
 
-### Bug 修复
-- **dev 模式导航路径重复追加**：恢复 `IS_DEV`（结构修补计划 #8 误移除），dev 模式强制 `base: '/'` 避免相对路径嵌套
+### 路径配置变更
+- **默认 base** 从 `'./'` 改为 `'/'`，解决 `npm run dev` 导航嵌套和 `npm run preview` 空白页问题
+- **CI 部署**：通过 `BASE_PATH` 环境变量注入子路径（如 `/pixel-eco/`），行为不变
+- **IS_RELATIVE** 逻辑随新默认值自动调整，SEO/OG/RSS 默认启用
 
 ## Dev 1.0.1
 
