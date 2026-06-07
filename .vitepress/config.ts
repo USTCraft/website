@@ -29,6 +29,7 @@ const SITE_TITLE = 'Pixel Eco - Template Demo'
 const SITE_DESCRIPTION = 'A pixel-styled portal template built with VitePress'
 
 export default defineConfig({
+  srcDir: 'src',
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   head: [

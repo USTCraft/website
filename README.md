@@ -31,6 +31,20 @@ npm run dev
 
 ```
 pixel-eco/
+├── src/                       # 内容源文件
+│   ├── index.md               # 首页
+│   ├── about.md               # 关于页
+│   ├── 404.md                 # 404 页面
+│   ├── news/                  # 新闻文章
+│   ├── docs/                  # 文档页面
+│   └── public/                # 静态资源
+│       ├── logo.png           # 站点 Logo（主）
+│       ├── logo.svg           # 站点 Logo（设计源文件）
+│       ├── favicon.ico        # 浏览器图标
+│       ├── 404.png            # 404 页面图片
+│       ├── button.click.ogg   # 按钮点击音效
+│       ├── background/        # 背景图片
+│       └── fonts/             # 像素字体文件
 ├── .vitepress/
 │   ├── config.ts              # 站点配置（标题、导航等）
 │   └── theme/
@@ -41,18 +55,9 @@ pixel-eco/
 │       │   ├── layout/        # Hero、页脚、返回顶部
 │       │   └── content/       # 卡片、侧边栏
 │       └── styles/            # CSS 变量、字体、动画
-├── index.md                   # 首页
-├── about.md                   # 关于页
-├── news/                      # 新闻文章
-├── docs/                      # 文档页面
-└── public/                    # 静态资源
-    ├── logo.png               # 站点 Logo（主）
-    ├── logo.svg               # 站点 Logo（设计源文件）
-    ├── favicon.ico            # 浏览器图标
-    ├── 404.png                # 404 页面图片
-    ├── button.click.ogg       # 按钮点击音效
-    ├── background/            # 背景图片
-    └── fonts/                 # 像素字体文件
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
 ## 自定义
@@ -84,20 +89,20 @@ export default defineConfig({
 
 ### 编辑内容
 
-所有页面内容均为 Markdown 文件，存放在仓库根目录：
+所有页面内容均为 Markdown 文件，存放在 `src/` 目录：
 
 | 文件 | 内容 |
 |------|------|
-| `index.md` | 首页（Hero + 特色栏目） |
-| `about.md` | 关于页面 |
-| `news/index.md` | 新闻列表 |
-| `news/welcome.md` | 示例新闻文章 |
-| `news/community-update.md` | 示例新闻文章 |
-| `docs/index.md` | 文档中心 |
+| `src/index.md` | 首页（Hero + 特色栏目） |
+| `src/about.md` | 关于页面 |
+| `src/news/index.md` | 新闻列表 |
+| `src/news/welcome.md` | 示例新闻文章 |
+| `src/news/community-update.md` | 示例新闻文章 |
+| `src/docs/index.md` | 文档中心 |
 
 ### 添加新闻
 
-在 `news/` 目录下新建 `.md` 文件，添加 frontmatter：
+在 `src/news/` 目录下新建 `.md` 文件，添加 frontmatter：
 
 ```md
 ---
@@ -115,7 +120,7 @@ category: 公告
 正文内容……
 ```
 
-然后在 `news/index.md` 中添加对应的 `<NewsCard>`。
+然后在 `src/news/index.md` 中添加对应的 `<NewsCard>`。
 
 ### CSS 变量
 

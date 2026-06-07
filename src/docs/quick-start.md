@@ -31,6 +31,20 @@ npm run dev
 
 ```
 pixel-eco/
+├── src/                       # 内容源文件
+│   ├── index.md               # 首页
+│   ├── about.md               # 关于页面
+│   ├── 404.md                 # 404 页面
+│   ├── news/                  # 新闻文章
+│   ├── docs/                  # 文档页面
+│   └── public/                # 静态资源
+│       ├── logo.png           # 站点 Logo（主）
+│       ├── logo.svg           # 站点 Logo（设计源文件）
+│       ├── favicon.ico        # 浏览器标签页图标
+│       ├── 404.png            # 404 页面图片
+│       ├── button.click.ogg   # 按钮点击音效
+│       ├── background/        # 背景图片
+│       └── fonts/             # 像素字体（Ark Pixel、Monocraft、Unifont）
 ├── .vitepress/
 │   ├── config.ts              # 站点配置（标题、导航等）
 │   └── theme/
@@ -40,17 +54,10 @@ pixel-eco/
 │       │   ├── ui/            # 按钮、输入框、对话框
 │       │   ├── layout/        # Hero、页脚、返回顶部
 │       │   └── content/       # 卡片、侧边栏
-│       ├── styles/            # CSS 变量、字体、动画
-├── index.md                   # 首页
-├── about.md                   # 关于页面
-├── news/                      # 新闻文章
-├── docs/                      # 文档页面
-└── public/                    # 静态资源
-    ├── logo.png               # 站点 Logo（主）
-    ├── logo.svg               # 站点 Logo（设计源文件）
-    ├── favicon.ico            # 浏览器标签页图标    ├── 404.png                # 404 页面图片
-    ├── button.click.ogg       # 按钮点击音效    ├── background/            # 背景图片
-    └── fonts/                 # 像素字体（Ark Pixel、Monocraft、Unifont）
+│       └── styles/            # CSS 变量、字体、动画
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
 ## 关键文件
@@ -59,8 +66,8 @@ pixel-eco/
 |------|------|
 | `.vitepress/config.ts` | 站点标题、导航链接、社交链接 |
 | `.vitepress/theme/styles/vars.css` | 调色板和 CSS 变量 |
-| `index.md` | 首页内容 |
-| `public/logo.png` | 站点 Logo |
+| `src/index.md` | 首页内容 |
+| `src/public/logo.png` | 站点 Logo |
 
 ## 下一步
 
