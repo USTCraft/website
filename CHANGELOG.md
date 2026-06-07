@@ -1,5 +1,23 @@
 # Changelog
 
+## Dev 1.0.1
+
+> 2026/06/07: 发布后质量收尾。修复文档错误、清理占位符、移除死代码。
+
+### 文档修复
+- **deployment.md**: 移除多余代码块结束标记
+- **components.md**: PixelButton3D 高度默认值 `'6rem'` → `'3.6rem'`，PixelDialog 默认值中文化（`'Cancel'/'Confirm'` → `'取消'/'确认'`）
+- **quick-start.md**: 移除不存在的 `data/` 目录
+- **news/index.md**: 新闻卡片标题日期 `2025` → `2026`
+
+### 占位符清理
+- **about.md**: LinkCard 占位 URL `example.com` → 实际仓库地址
+- **SiteFooter.vue**: 主题链接 `example.com` → 实际仓库地址
+
+### 代码质量
+- **config.ts**: 移除 `IS_DEV` 死代码
+- **index.ts**: 缩进对齐
+
 ## Release 1.0.0
 
 > 2026/06/07: 正式发布版本。经过多个阶段的重构和完善，模板功能完备、设计统一、文档完善，适合使用。
