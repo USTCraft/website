@@ -1,5 +1,17 @@
 # Changelog
 
+## Dev 1.0.2
+
+> 2026/06/07: 内容文件迁移至 `src/` 目录，利用 VitePress `srcDir` 实现内容与配置分离。
+
+### 项目结构重构
+- **srcDir 迁移**：`index.md`、`about.md`、`404.md`、`news/`、`docs/` 统一移入 `src/`
+- **public 迁移**：`public/` 移入 `src/public/`（VitePress `srcDir` 默认行为）
+- **config.ts**：添加 `srcDir: 'src'`
+- **README.md**：结构树同步更新，内容路径改为 `src/` 前缀
+- **quick-start.md**：结构树同步更新
+- 双模式构建验证通过（relative + absolute）
+
 ## Dev 1.0.1
 
 > 2026/06/07: 发布后质量收尾。修复文档错误、清理占位符、移除死代码。
