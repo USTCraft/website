@@ -48,8 +48,8 @@ pixel-eco/
 └── public/                    # 静态资源
     ├── logo.png               # 站点 Logo（主）
     ├── logo.svg               # 站点 Logo（设计源文件）
-    ├── favicon.ico            # 浏览器标签页图标
-    ├── background/            # 背景图片
+    ├── favicon.ico            # 浏览器标签页图标    ├── 404.png                # 404 页面图片
+    ├── button.click.ogg       # 按钮点击音效    ├── background/            # 背景图片
     └── fonts/                 # 像素字体（Ark Pixel、Monocraft、Unifont）
 ```
 

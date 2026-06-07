@@ -10,6 +10,15 @@
 - **quick-start.md**: 移除不存在的 `data/` 目录
 - **news/index.md**: 新闻卡片标题日期 `2025` → `2026`
 
+### 文档对齐（Docs 内容对齐计划）
+- **customization.md**: 修复页脚配置虚构 `message` 字段；社交链接示例 `twitter`/`discord` → `github`/`bilibili`/`qq`
+- **components.md**: 全面改写，覆盖全部 19 个组件，按 `ui/`/`layout/`/`content/`/`icons/` 四目录分组，新增快速索引表
+- **quick-start.md**: 项目结构树补全 `icons/` 子目录、`404.png`、`button.click.ogg`
+- **news.md**: NewsCard 属性表补充 `button-text`
+
+### 同步更新
+- **README.md**: 结构树同步 `icons/` 及 `public/` 补充项；组件表补充 `SiteFooter`
+
 ### 占位符清理
 - **about.md**: LinkCard 占位 URL `example.com` → 实际仓库地址
 - **SiteFooter.vue**: 主题链接 `example.com` → 实际仓库地址

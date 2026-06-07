@@ -101,21 +101,23 @@ themeConfig: {
 
 ```ts
 footer: {
-  message: '基于 MIT 许可协议发布。',
-  copyright: 'Copyright © 2025 我的站点',
+  copyright: '© 2026-Present Pixel Eco. 保留所有权利。',
 }
 ```
 
 ## 社交链接
 
-添加 GitHub、Twitter、Discord 等：
+添加 GitHub、Bilibili、QQ 等社交链接：
 
 ```ts
 socialLinks: [
   { icon: 'github', link: 'https://github.com/你' },
-  { icon: 'twitter', link: 'https://twitter.com/你' },
+  { icon: 'bilibili', link: 'https://space.bilibili.com/你' },
+  { icon: 'qq', link: 'https://你的QQ群链接' },
 ]
 ```
+
+模板内置了 `github`、`bilibili`、`qq` 三个图标组件。VitePress 还内置了 `twitter`、`discord`、`youtube` 等图标，详见 [VitePress 文档](https://vitepress.dev/zh/reference/default-theme-nav#social-links)。
 
 ## 文档管理
 

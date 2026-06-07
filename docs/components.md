@@ -12,37 +12,47 @@ const textareaText = ref('')
 
 # 组件参考
 
-所有内置 Pixel UI 组件均可直接在 Markdown 页面中使用。
+所有内置 Pixel UI 组件均可直接在 Markdown 页面中使用。组件按功能分为四类：
 
-## 按钮
+| 用途 | 组件 |
+|------|------|
+| 我要一个按钮 | `PixelButton` / `PixelButtonClassic` / `PixelButton3D` |
+| 我要输入框 | `PixelInput` / `PixelTextarea` |
+| 我要弹窗 | `PixelDialog` |
+| 我要 Hero 横幅 | `HomeHero` |
+| 我要图文区块 | `HomeIntro` |
+| 我要新闻卡片 | `NewsCard` |
+| 我要链接卡片 | `LinkCard` |
+| 我要返回顶部 | `ScrollToTop` |
 
-三种按钮变体，支持点击音效和悬停/按下状态。
+---
 
-### 普通
+## `ui/` — 交互组件
+
+可直接在 Markdown 页面中使用的交互控件。
+
+### PixelButton
+
+像素风格按钮，支持深色变体和点击音效。
 
 <PixelButton>普通按钮</PixelButton>
 
-```html
-<PixelButton>普通按钮</PixelButton>
-```
-
-### 深色
-
 <PixelButton dark>深色按钮</PixelButton>
-
-```html
-<PixelButton dark>深色按钮</PixelButton>
-```
-
-### 静音（无点击音效）
 
 <PixelButton sound-url="">静音按钮</PixelButton>
 
 ```html
+<PixelButton>普通按钮</PixelButton>
+<PixelButton dark>深色按钮</PixelButton>
 <PixelButton sound-url="">静音按钮</PixelButton>
 ```
 
-## Classic 按钮
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `dark` | `boolean` | `false` | 深色主题 |
+| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL（设为空则静音） |
+
+### PixelButtonClassic
 
 全宽纹理按钮，带悬停高亮效果。
 
@@ -52,9 +62,11 @@ const textareaText = ref('')
 <PixelButtonClassic>Classic 按钮</PixelButtonClassic>
 ```
 
----
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
 
-## 3D 按钮
+### PixelButton3D
 
 带深度效果的可按压 3D 按钮。
 
@@ -68,6 +80,11 @@ const textareaText = ref('')
 <PixelButton3D height="9rem">高 3D 按钮</PixelButton3D>
 ```
 
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `height` | `string` | `'3.6rem'` | 按钮高度（CSS 值） |
+| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
+
 <style>
 .demo-3d-row {
   display: flex;
@@ -77,9 +94,7 @@ const textareaText = ref('')
 }
 </style>
 
----
-
-## 输入框
+### PixelInput
 
 带像素边框的文本输入框。
 
@@ -91,7 +106,11 @@ const textareaText = ref('')
 <PixelInput v-model="inputText" />
 ```
 
-## 多行文本框
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `model-value` | `string` | `''` | v-model 绑定值 |
+
+### PixelTextarea
 
 带自动调整大小的多行文本输入。
 
@@ -101,7 +120,11 @@ const textareaText = ref('')
 <PixelTextarea v-model="textareaText" />
 ```
 
-## 对话框
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `model-value` | `string` | `''` | v-model 绑定值 |
+
+### PixelDialog
 
 带标题、内容插槽和底部按钮的模态对话框。
 
@@ -126,9 +149,210 @@ const textareaText = ref('')
 </PixelDialog>
 ```
 
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `model-value` | `boolean` | `false` | v-model 控制显示/隐藏 |
+| `title` | `string` | `''` | 对话框标题 |
+| `cancel-text` | `string` | `'取消'` | 取消按钮文字 |
+| `confirm-text` | `string` | `'确认'` | 确认按钮文字 |
+| `@confirm` | event | — | 点击确认按钮时触发 |
+
+---
+
+## `layout/` — 布局组件
+
+用于构建页面结构和区域划分。
+
+### HomeHero
+
+首页大图横幅，支持标题、副标题、描述、Logo 和自定义背景。
+
+<HomeHero
+  title="像素生态"
+  subtitle="创意驱动的社区"
+  description="一个像素风格的静态站点模板"
+/>
+
+```html
+<HomeHero
+  title="像素生态"
+  subtitle="创意驱动的社区"
+  description="一个像素风格的静态站点模板"
+/>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `title` | `string` | `'Your Organization'` | 主标题 |
+| `subtitle` | `string` | `''` | 副标题 |
+| `description` | `string` | `''` | 描述文字 |
+| `logo` | `string` | `'/logo.png'` | Logo 图片路径 |
+| `background` | `string` | `''` | 背景图片路径（不设置则使用渐变背景） |
+
+### HomeIntro
+
+图文介绍区块，支持左右布局切换。
+
+<HomeIntro
+  title="特色栏目"
+  description="这里是文字介绍内容，图片显示在右侧（默认）。设置 right 属性可将图片切换到左侧。"
+  image="/background/19.jpg"
+/>
+
+```html
+<HomeIntro
+  title="特色栏目"
+  description="这里是文字介绍内容。"
+  image="/background/19.jpg"
+/>
+<!-- 图片居左 -->
+<HomeIntro
+  title="特色栏目"
+  description="图片在左侧显示。"
+  image="/background/19.jpg"
+  right
+/>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `title` | `string` | 必填 | 区块标题 |
+| `description` | `string` | `''` | 描述文字 |
+| `image` | `string` | `''` | 图片路径 |
+| `right` | `boolean` | `false` | 图片居左（默认居右） |
+
+### SiteFooter
+
+全站页脚，包含版权信息和社交图标。**由 Layout 自动渲染，无需手动使用。**
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:----:|:----:|:------:|:----:|
+| 无 | — | — | 无需传参 |
+
+### NavBar
+
+顶部导航栏，支持点击音效。**由 Layout 自动渲染，无需手动使用。**
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
+
+### ScrollToTop
+
+返回顶部按钮，页面滚动后右下角浮现。**全局注册，直接使用即可。**
+
+<ScrollToTop />
+
+```html
+<!-- 通常放在 Layout 末尾，或 Markdown 页面底部 -->
+<ScrollToTop />
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:----:|:----:|:------:|:----:|
+| 无 | — | — | 无需传参 |
+
+---
+
+## `content/` — 内容组件
+
+用于展示结构化内容，如文章、卡片等。
+
+### NewsCard
+
+新闻列表卡片，带标题、描述、背景图和按钮。
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap">
+  <NewsCard
+    title="示例文章"
+    brief="这是一篇示例文章的简短描述。"
+    image="/background/44.jpg"
+    link="/news/welcome"
+  />
+</div>
+
+```html
+<NewsCard
+  title="示例文章"
+  brief="这是一篇示例文章的简短描述。"
+  image="/background/44.jpg"
+  link="/news/welcome"
+/>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `title` | `string` | 必填 | 卡片标题 |
+| `brief` | `string` | `''` | 简短描述 |
+| `image` | `string` | `''` | 卡片背景图片 |
+| `link` | `string` | 必填 | 文章链接 |
+| `button-text` | `string` | `'阅读更多'` | 按钮文字 |
+
+### LinkCard
+
+链接卡片网格，自动识别内外链（外链新标签打开，内链使用 `withBase`）。
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap">
+  <LinkCard :link="{ name: '快速开始', url: '/docs/quick-start', image: '/background/19.jpg', description: '几分钟内启动站点' }" />
+  <LinkCard :link="{ name: 'Pixel Eco', url: 'https://github.com/Lylighte/pixel-eco', description: 'GitHub 仓库' }" />
+</div>
+
+```html
+<LinkCard :link="{
+  name: '快速开始',
+  url: '/docs/quick-start',
+  image: '/background/19.jpg',
+  description: '几分钟内启动站点'
+}" />
+```
+
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| `link` | `object` | 必填。包含以下字段： |
+| `link.name` | `string` | 卡片标题 |
+| `link.url` | `string` | 链接地址（自动识别内外链） |
+| `link.image` | `string` | （可选）卡片背景图片 |
+| `link.description` | `string` | （可选）描述文字 |
+
+### DocsSidebar
+
+文档侧边栏导航，可折叠。**由 Layout 自动渲染，无需手动使用。**
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:----:|:----:|:------:|:----:|
+| 无 | — | — | 无需传参 |
+
+### ArticleView
+
+新闻文章详情页布局，含封面图、作者信息、日期和标签。**由 Layout 自动渲染，无需手动使用。**
+
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| `title` | `string` | 文章标题 |
+| `author` | `object` | 作者信息 `{ name, avatar, tags? }` |
+| `date` | `string` | 发布日期 |
+| `end-date` | `string` | （可选）结束日期 |
+| `cover` | `string` | 封面图路径 |
+| `category` | `string` | 文章分类 |
+
+---
+
+## `icons/` — 图标组件
+
+图标组件通常由 `SiteFooter` 内部使用，也可在自定义布局中直接引用。
+
+| 组件 | 用途 | 说明 |
+|------|------|------|
+| `GithubIcon` | GitHub 社交图标 | 深色圆形背景，白色 Octocat 标志 |
+| `BilibiliIcon` | Bilibili 社交图标 | 粉色圆形背景，白色 B 站标志 |
+| `QQIcon` | QQ 社交图标 | 圆形背景，企鹅标志 |
+| `CalendarIcon` | 日历图标 | 保留供扩展使用 |
+
+---
+
 ## 边框工具类
 
-使用 `.pixel-border` 类为元素添加像素风格边框。
+使用 `.pixel-border` 类为任意元素添加像素风格边框。
 
 <div class="pixel-border" style="padding:2rem;text-align:center;max-width:400px;margin:1rem auto">
   <p><code>.pixel-border</code> 内部的内容</p>
@@ -139,40 +363,3 @@ const textareaText = ref('')
   <p>内容放在 .pixel-border 内部</p>
 </div>
 ```
-
-## Props 参考
-
-### PixelButton
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `dark` | `boolean` | `false` | 深色主题 |
-| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL（设为空则静音） |
-
-### PixelButtonClassic
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
-
-### PixelButton3D
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `height` | `string` | `'3.6rem'` | 按钮高度（CSS 值） |
-| `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
-
-### PixelInput / PixelTextarea
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `model-value` | `string` | `''` | v-model 绑定值 |
-
-### PixelDialog
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `model-value` | `boolean` | `false` | v-model 控制显示/隐藏 |
-| `title` | `string` | `''` | 对话框标题 |
-| `cancel-text` | `string` | `'取消'` | 取消按钮文字 |
-| `confirm-text` | `string` | `'确认'` | 确认按钮文字 |

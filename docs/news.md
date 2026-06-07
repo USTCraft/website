@@ -63,6 +63,7 @@ category: 综合
 | `brief` | 简短描述文字 |
 | `image` | 卡片背景图片 |
 | `link` | 文章链接 |
+| `button-text` | 按钮文字（默认 `'阅读更多'`） |
 
 ## Markdown 功能
 

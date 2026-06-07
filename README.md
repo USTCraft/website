@@ -49,6 +49,8 @@ pixel-eco/
     ├── logo.png               # 站点 Logo（主）
     ├── logo.svg               # 站点 Logo（设计源文件）
     ├── favicon.ico            # 浏览器图标
+    ├── 404.png                # 404 页面图片
+    ├── button.click.ogg       # 按钮点击音效
     ├── background/            # 背景图片
     └── fonts/                 # 像素字体文件
 ```
@@ -167,6 +169,7 @@ category: 公告
 | `PixelDialog` | 模态对话框 |
 | `HomeHero` | 首页大图横幅 |
 | `HomeIntro` | 首页图文介绍（支持左右布局） |
+| `SiteFooter` | 全站页脚（由 Layout 自动渲染） |
 | `NewsCard` | 新闻卡片 |
 | `LinkCard` | 链接卡片（自动识别内外链） |
 | `DocsSidebar` | 文档侧边栏导航 |
