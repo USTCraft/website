@@ -44,7 +44,7 @@ export default {
     app.component('HomeHero', HomeHero)
     app.component('HomeIntro', HomeIntro)
     app.component('NewsCard', NewsCard)
-        app.component('LinkCard', LinkCard)
+    app.component('LinkCard', LinkCard)
     app.component('DocsSidebar', DocsSidebar)
     app.component('SiteFooter', SiteFooter)
   },

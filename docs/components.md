@@ -159,7 +159,7 @@ const textareaText = ref('')
 
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `height` | `string` | `'6rem'` | 按钮高度（CSS 值） |
+| `height` | `string` | `'3.6rem'` | 按钮高度（CSS 值） |
 | `sound-url` | `string` | `'/button.click.ogg'` | 点击音效 URL |
 
 ### PixelInput / PixelTextarea
@@ -174,5 +174,5 @@ const textareaText = ref('')
 |------|------|--------|------|
 | `model-value` | `boolean` | `false` | v-model 控制显示/隐藏 |
 | `title` | `string` | `''` | 对话框标题 |
-| `cancel-text` | `string` | `'Cancel'` | 取消按钮文字 |
-| `confirm-text` | `string` | `'Confirm'` | 确认按钮文字 |
+| `cancel-text` | `string` | `'取消'` | 取消按钮文字 |
+| `confirm-text` | `string` | `'确认'` | 确认按钮文字 |

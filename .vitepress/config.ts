@@ -15,7 +15,6 @@ const BASE_PATH = (process.env.BASE_PATH || './').replace(/\/?$/, '/')
 const IS_RELATIVE = BASE_PATH === './'
 
 const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}`
-const IS_DEV = process.argv[2] === 'dev'
 
 // 非 relative 模式下推导 SITE_URL（用于 SEO/OG/sitemap）
 // 可通过 SITE_URL 环境变量覆盖，否则按 GitHub Pages 惯例推导
@@ -56,7 +55,7 @@ export default defineConfig({
     ] : []),
   ],
   srcExclude: ['dev-notes/**', 'AGENTS.md', 'CHANGELOG.md', 'README.md', 'LICENSE'],
-  base: IS_DEV ? '/' : BASE_PATH,
+  base: BASE_PATH,
   sitemap: SITE_URL ? {
     hostname: SITE_URL,
   } : undefined,

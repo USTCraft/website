@@ -41,7 +41,6 @@ npm run preview
 4. 推送后 Actions 会自动构建部署
 
 项目已自带 `.github/workflows/deploy.yml`，无需额外创建。每次推送 `main` 分支都会自动构建并发布。
-```
 
 ## 部署到 Netlify
 

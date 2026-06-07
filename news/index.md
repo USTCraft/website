@@ -8,7 +8,7 @@
 />
 
 <NewsCard
-  title="社区动态 — 2025 年 6 月"
+  title="社区动态 — 2026 年 6 月"
   brief="了解最新活动、新项目和即将到来的安排。看看我们的成员这个月都在忙些什么。"
   image="/background/15.jpg"
   link="/news/community-update"

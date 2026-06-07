@@ -41,7 +41,6 @@ pixel-eco/
 │       │   ├── layout/        # Hero、页脚、返回顶部
 │       │   └── content/       # 卡片、侧边栏
 │       ├── styles/            # CSS 变量、字体、动画
-│       └── data/              # 静态数据
 ├── index.md                   # 首页
 ├── about.md                   # 关于页面
 ├── news/                      # 新闻文章
