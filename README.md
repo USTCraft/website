@@ -198,7 +198,29 @@ npm run build      # 构建生产版本
 npm run preview    # 本地预览构建结果
 ```
 
-构建产物在 `.vitepress/dist/`，可部署到任意静态托管服务（GitHub Pages、Netlify、Vercel 等）。
+构建产物在 `.vitepress/dist/`，可部署到任意静态托管服务。
+
+### 自定义域名 + Nginx
+
+通过环境变量控制部署路径：
+
+```bash
+# 根路径部署 https://example.com/
+npm run build
+
+# 子路径部署 https://example.com/pixel-eco/
+BASE_PATH=/pixel-eco/ SITE_URL=https://example.com/pixel-eco/ npm run build
+```
+
+Nginx 配置示例及完整部署流程见 [部署指南](https://github.com/Lylighte/pixel-eco/blob/dev/dev-notes/deployment-guide.md)。
+
+### 平台部署
+
+| 平台 | 说明 |
+|------|------|
+| GitHub Pages | 通过 `actions/configure-pages@v4` 自动注入 `BASE_PATH` |
+| Netlify / Vercel | 设置 `BASE_PATH` 和 `SITE_URL` 环境变量 |
+| 自有服务器 | 参考上方 Nginx 配置 |
 
 ## 项目起源
 

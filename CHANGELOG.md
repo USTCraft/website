@@ -1,5 +1,19 @@
 # Changelog
 
+## Dev 1.0.3
+
+> 2026/06/11: SEO 标签页面级修复、部署实操文档完善。
+
+### SEO 修复
+- **config.ts**: 新增 `transformHead` 钩子，`canonical`/`og:url`/`og:title`/`og:description`/`twitter:title`/`twitter:description` 按页面动态生成
+- **config.ts**: 全局 `head` 精简，移除被 `transformHead` 覆盖的页面级标签，移除 `as any` 类型规避
+- **config.ts**: sitemap 添加 `transformItems` 过滤 `404.html`
+- **404.md**: frontmatter 添加 `sitemap: false`（双保险）
+
+### 部署文档
+- **deployment-guide.md**: 新增实操步骤（构建→上传→权限修复→Nginx→验证），补充 403/SELinux/404 排错表
+- **README.md**: 部署节补充自定义域名 + Nginx 说明，链接到部署指南
+
 ## Dev 1.0.2
 
 > 2026/06/07: 内容文件迁移至 `src/` 目录，利用 VitePress `srcDir` 实现内容与配置分离。修复 dev/preview 模式路径问题。
