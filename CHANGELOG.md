@@ -1,8 +1,8 @@
 # Changelog
 
-## Dev 1.0.3
+## Release 1.1.0
 
-> 2026/06/11: SEO 标签页面级修复、部署实操文档完善。
+> 2026/06/11: SEO 页面级标签修复、部署实操文档完善、内容架构迁移、文档质量收尾。
 
 ### SEO 修复
 - **config.ts**: 新增 `transformHead` 钩子，`canonical`/`og:url`/`og:title`/`og:description`/`twitter:title`/`twitter:description` 按页面动态生成
@@ -10,55 +10,33 @@
 - **config.ts**: sitemap 添加 `transformItems` 过滤 `404.html`
 - **404.md**: frontmatter 添加 `sitemap: false`（双保险）
 
-### 部署文档
-- **deployment-guide.md**: 新增实操步骤（构建→上传→权限修复→Nginx→验证），补充 403/SELinux/404 排错表
-- **README.md**: 部署节补充自定义域名 + Nginx 说明，链接到部署指南
-
-## Dev 1.0.2
-
-> 2026/06/07: 内容文件迁移至 `src/` 目录，利用 VitePress `srcDir` 实现内容与配置分离。修复 dev/preview 模式路径问题。
-
-### 项目结构重构
+### 内容架构迁移（Dev 1.0.2）
 - **srcDir 迁移**：`index.md`、`about.md`、`404.md`、`news/`、`docs/` 统一移入 `src/`
 - **public 迁移**：`public/` 移入 `src/public/`（VitePress `srcDir` 默认行为）
 - **config.ts**：添加 `srcDir: 'src'`
-- **README.md**：结构树同步更新，内容路径改为 `src/` 前缀
-- **quick-start.md**：结构树同步更新
+- **README.md** / **quick-start.md**：结构树同步更新
 
-### 路径配置变更
+### 路径配置变更（Dev 1.0.2）
 - **默认 base** 从 `'./'` 改为 `'/'`，解决 `npm run dev` 导航嵌套和 `npm run preview` 空白页问题
-- **CI 部署**：通过 `BASE_PATH` 环境变量注入子路径（如 `/pixel-eco/`），行为不变
+- **CI 部署**：通过 `BASE_PATH` 环境变量注入子路径，行为不变
 - **IS_RELATIVE** 逻辑随新默认值自动调整，SEO/OG/RSS 默认启用
 
-### 文档更新
-- **README.md**：快速开始补全 `build`/`preview` 流程，精简构建节，同步 `src/public/` 路径
-
-## Dev 1.0.1
-
-> 2026/06/07: 发布后质量收尾。修复文档错误、清理占位符、移除死代码。
-
-### 文档修复
+### 文档质量收尾（Dev 1.0.1）
 - **deployment.md**: 移除多余代码块结束标记
-- **components.md**: PixelButton3D 高度默认值 `'6rem'` → `'3.6rem'`，PixelDialog 默认值中文化（`'Cancel'/'Confirm'` → `'取消'/'确认'`）
-- **quick-start.md**: 移除不存在的 `data/` 目录
-- **news/index.md**: 新闻卡片标题日期 `2025` → `2026`
-
-### 文档对齐（Docs 内容对齐计划）
-- **customization.md**: 修复页脚配置虚构 `message` 字段；社交链接示例 `twitter`/`discord` → `github`/`bilibili`/`qq`
-- **components.md**: 全面改写，覆盖全部 19 个组件，按 `ui/`/`layout/`/`content/`/`icons/` 四目录分组，新增快速索引表
-- **quick-start.md**: 项目结构树补全 `icons/` 子目录、`404.png`、`button.click.ogg`
+- **components.md**: PixelButton3D 高度默认值修正，PixelDialog 默认值中文化，全面改写覆盖全部 19 个组件
+- **customization.md**: 修复页脚配置虚构字段，社交链接示例更新
+- **quick-start.md**: 移除不存在的 `data/` 目录，补全项目结构树
 - **news.md**: NewsCard 属性表补充 `button-text`
-
-### 同步更新
-- **README.md**: 结构树同步 `icons/` 及 `public/` 补充项；组件表补充 `SiteFooter`
-
-### 占位符清理
-- **about.md**: LinkCard 占位 URL `example.com` → 实际仓库地址
-- **SiteFooter.vue**: 主题链接 `example.com` → 实际仓库地址
-
-### 代码质量
+- **news/index.md**: 新闻卡片日期 `2025` → `2026`
+- **about.md** / **SiteFooter.vue**: 占位 URL `example.com` → 实际仓库地址
 - **config.ts**: 移除 `IS_DEV` 死代码
-- **index.ts**: 缩进对齐
+
+### 部署文档
+- **deployment-guide.md**: 新增实操步骤（构建→上传→权限修复→Nginx→验证），补充 403/SELinux/404 排错表
+- **README.md**: 部署节补充自定义域名 + Nginx 说明，新增平台部署表
+
+### 项目治理
+- 清理 8 个已完成计划文件，`dev-notes/` 仅保留部署指南
 
 ## Release 1.0.0
 
