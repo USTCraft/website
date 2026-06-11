@@ -4,13 +4,13 @@ import { RssPlugin } from 'vitepress-plugin-rss'
 // ============================================================
 // 一、品牌标识 — 自定义站点时只需修改此区域
 // ============================================================
-const GITHUB_USERNAME = 'Lylighte'
-const REPO_NAME = 'pixel-eco'
-const SITE_TITLE = 'Pixel Eco - Template Demo'
-const SITE_DESCRIPTION = 'A pixel-styled portal template built with VitePress'
-const SITE_AUTHOR = 'Pixel Eco Contributors'
-const SITE_NAME_OG = 'Pixel Eco'
-const COPYRIGHT_TEXT = '© 2026-Present Pixel Eco. 保留所有权利。'
+const GITHUB_USERNAME = 'ustcraft'
+const REPO_NAME = 'website'
+const SITE_TITLE = 'USTCraft 像素艺术社'
+const SITE_DESCRIPTION = '从 Minecraft 等优秀作品出发，探索更广泛的像素艺术世界。'
+const SITE_AUTHOR = 'USTCraft 运营小组'
+const SITE_NAME_OG = 'USTCraft 像素艺术社'
+const COPYRIGHT_TEXT = '© 2026-Present USTCraft. 保留所有权利。'
 
 // ============================================================
 // 二、部署路径 — 通常无需修改
@@ -108,7 +108,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '新闻', link: '/news/' },
       { text: '关于', link: '/about' },
-      { text: '文档', link: '/docs/' },
+      // { text: '文档', link: '/docs/' },
     ],
     socialLinks: [
       { icon: 'github', link: GITHUB_URL, text: '仓库地址' } as any,

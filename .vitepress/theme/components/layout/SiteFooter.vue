@@ -35,12 +35,9 @@ const iconNames: Record<string, string> = {
         <a href="https://github.com/RandomLemon/neco" target="_blank" rel="noopener">neco</a>。感谢
         <span class="highlight-name">int15</span> 与 <span class="highlight-name">kingcq</span> 的贡献。
       </span>
-      <!--
       <span id="declaration">
-        NOT AN OFFICIAL MINECRAFT ORGANIZATION. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
-        MICROSOFT.
+        非官方 Minecraft 组织。未经 Mojang 或 Microsoft 认可，亦与其无关联。
       </span>
-      -->
       <!-- ICP备案 — 取消注释并填入备案号即可启用 -->
       <!--
       <span id="declaration">
