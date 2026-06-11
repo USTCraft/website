@@ -37,6 +37,7 @@
 
 ### 项目治理
 - 清理 8 个已完成计划文件，`dev-notes/` 仅保留部署指南
+- **config.ts**: 三段式重组——品牌标识/部署路径/VitePress 配置分离，提取 `SITE_AUTHOR`/`SITE_NAME_OG`/`COPYRIGHT_TEXT` 常量，自定义站点只需修改第一段 7 个常量
 
 ## Release 1.0.0
 
