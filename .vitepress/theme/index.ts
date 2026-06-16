@@ -18,6 +18,13 @@ import PixelButton3D from './components/ui/PixelButton3D.vue'
 import PixelInput from './components/ui/PixelInput.vue'
 import PixelTextarea from './components/ui/PixelTextarea.vue'
 import PixelDialog from './components/ui/PixelDialog.vue'
+import PixelBadge from './components/ui/PixelBadge.vue'
+import PixelCard from './components/ui/PixelCard.vue'
+import PixelTooltip from './components/ui/PixelTooltip.vue'
+import PixelAccordion from './components/ui/PixelAccordion.vue'
+import PixelTabs from './components/ui/PixelTabs.vue'
+import PixelTimeline from './components/ui/PixelTimeline.vue'
+import PixelProgress from './components/ui/PixelProgress.vue'
 import ScrollToTop from './components/layout/ScrollToTop.vue'
 
 // Layout Components
@@ -25,6 +32,7 @@ import HomeHero from './components/layout/HomeHero.vue'
 import HomeIntro from './components/layout/HomeIntro.vue'
 import NewsCard from './components/content/NewsCard.vue'
 import LinkCard from './components/content/LinkCard.vue'
+import PixelImage from './components/content/PixelImage.vue'
 import DocsSidebar from './components/content/DocsSidebar.vue'
 import SiteFooter from './components/layout/SiteFooter.vue'
 
@@ -38,6 +46,13 @@ export default {
     app.component('PixelInput', PixelInput)
     app.component('PixelTextarea', PixelTextarea)
     app.component('PixelDialog', PixelDialog)
+    app.component('PixelBadge', PixelBadge)
+    app.component('PixelCard', PixelCard)
+    app.component('PixelTooltip', PixelTooltip)
+    app.component('PixelAccordion', PixelAccordion)
+    app.component('PixelTabs', PixelTabs)
+    app.component('PixelTimeline', PixelTimeline)
+    app.component('PixelProgress', PixelProgress)
     app.component('ScrollToTop', ScrollToTop)
 
     // Register layout components for use in Markdown
@@ -45,6 +60,7 @@ export default {
     app.component('HomeIntro', HomeIntro)
     app.component('NewsCard', NewsCard)
     app.component('LinkCard', LinkCard)
+    app.component('PixelImage', PixelImage)
     app.component('DocsSidebar', DocsSidebar)
     app.component('SiteFooter', SiteFooter)
   },

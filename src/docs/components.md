@@ -12,6 +12,8 @@ const textareaText = ref('')
 
 # 组件参考
 
+`Ctrl + F` 快速查找组件名称。
+
 所有内置 Pixel UI 组件均可直接在 Markdown 页面中使用。组件按功能分为四类：
 
 | 用途 | 组件 |
@@ -19,6 +21,14 @@ const textareaText = ref('')
 | 我要一个按钮 | `PixelButton` / `PixelButtonClassic` / `PixelButton3D` |
 | 我要输入框 | `PixelInput` / `PixelTextarea` |
 | 我要弹窗 | `PixelDialog` |
+| 我要徽章 | `PixelBadge` |
+| 我要卡片 | `PixelCard` |
+| 我要提示 | `PixelTooltip` |
+| 我要折叠 | `PixelAccordion` |
+| 我要标签页 | `PixelTabs` |
+| 我要时间线 | `PixelTimeline` |
+| 我要进度条 | `PixelProgress` |
+| 我要展示图片 | `PixelImage` |
 | 我要 Hero 横幅 | `HomeHero` |
 | 我要图文区块 | `HomeIntro` |
 | 我要新闻卡片 | `NewsCard` |
@@ -157,6 +167,199 @@ const textareaText = ref('')
 | `confirm-text` | `string` | `'确认'` | 确认按钮文字 |
 | `@confirm` | event | — | 点击确认按钮时触发 |
 
+### PixelBadge
+
+像素风格徽章，支持四种颜色类型、两种尺寸和空心样式。
+
+<PixelBadge type="info">v1.1.0</PixelBadge>
+<PixelBadge type="success">已完成</PixelBadge>
+<PixelBadge type="warning">注意</PixelBadge>
+<PixelBadge type="danger">重要</PixelBadge>
+<PixelBadge type="info" outline>空心</PixelBadge>
+
+```html
+<PixelBadge type="info">v1.1.0</PixelBadge>
+<PixelBadge type="success">已完成</PixelBadge>
+<PixelBadge type="warning">注意</PixelBadge>
+<PixelBadge type="danger">重要</PixelBadge>
+<PixelBadge type="info" outline>空心</PixelBadge>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | 颜色类型 |
+| `size` | `'sm' \| 'md'` | `'md'` | 尺寸 |
+| `outline` | `boolean` | `false` | 空心样式 |
+
+### PixelCard
+
+像素风格卡片容器，支持标题、图标、链接和悬停效果。
+
+<PixelCard title="快速开始" icon="🚀">
+  几分钟内启动你的像素风格站点。
+</PixelCard>
+
+<PixelCard title="GitHub 仓库" icon="📦" href="https://github.com/Lylighte/pixel-eco">
+  点击访问项目源码。
+</PixelCard>
+
+```html
+<PixelCard title="快速开始" icon="🚀">
+  几分钟内启动你的像素风格站点。
+</PixelCard>
+
+<PixelCard title="GitHub 仓库" icon="📦" href="https://github.com/Lylighte/pixel-eco">
+  点击访问项目源码。
+</PixelCard>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `title` | `string` | `''` | 卡片标题 |
+| `icon` | `string` | `''` | 标题图标（emoji 或文本） |
+| `href` | `string` | `''` | 可选链接，有值时整卡可点击 |
+| `hoverable` | `boolean` | `true` | 是否启用悬停效果 |
+
+### PixelTooltip
+
+像素风格悬浮提示，鼠标悬停或聚焦时显示。
+
+<PixelTooltip text="HyperText Markup Language">
+  HTML
+</PixelTooltip>
+
+```html
+<PixelTooltip text="HyperText Markup Language">
+  HTML
+</PixelTooltip>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `text` | `string` | 必填 | 提示内容 |
+| `position` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | 弹出方向 |
+
+### PixelAccordion
+
+像素风格折叠面板，点击标题展开/收起内容。
+
+<PixelAccordion title="什么是 Pixel Eco？">
+  一个像素风格的 VitePress 静态站点模板，内置丰富的像素 UI 组件。
+</PixelAccordion>
+
+<PixelAccordion title="默认展开" open>
+  设置 <code>open</code> 属性可让面板默认展开。
+</PixelAccordion>
+
+```html
+<PixelAccordion title="什么是 Pixel Eco？">
+  一个像素风格的 VitePress 静态站点模板。
+</PixelAccordion>
+
+<PixelAccordion title="默认展开" open>
+  设置 open 属性可让面板默认展开。
+</PixelAccordion>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `title` | `string` | 必填 | 折叠标题 |
+| `open` | `boolean` | `false` | 默认展开 |
+
+### PixelTabs
+
+像素风格标签页切换，通过命名插槽分发内容。
+
+<PixelTabs :tabs="['JavaScript', 'TypeScript', 'Python']">
+  <template #tab-0>
+
+```js
+console.log('Hello from JavaScript!')
+```
+
+  </template>
+  <template #tab-1>
+
+```ts
+const msg: string = 'Hello from TypeScript!'
+console.log(msg)
+```
+
+  </template>
+  <template #tab-2>
+
+```python
+print('Hello from Python!')
+```
+
+  </template>
+</PixelTabs>
+
+```html
+<PixelTabs :tabs="['JavaScript', 'TypeScript', 'Python']">
+  <template #tab-0>
+    ...JavaScript 内容...
+  </template>
+  <template #tab-1>
+    ...TypeScript 内容...
+  </template>
+  <template #tab-2>
+    ...Python 内容...
+  </template>
+</PixelTabs>
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `tabs` | `string[]` | 必填 | 标签页名称列表 |
+| `active` | `number` | `0` | 默认激活索引 |
+
+### PixelTimeline
+
+像素风格时间线，交替左右布局，移动端自动切换为单列。
+
+<PixelTimeline :items="[
+  { date: '2026-06', title: 'Dev 1.1.1', content: '性能优化、搜索、5 个新组件' },
+  { date: '2026-06', title: 'Release 1.1.0', content: 'SEO 修复、内容架构迁移' },
+  { date: '2026-05', title: 'Release 1.0.0', content: '首个正式版本发布' },
+]" />
+
+```html
+<PixelTimeline :items="[
+  { date: '2026-06', title: 'Dev 1.1.1', content: '性能优化、搜索' },
+  { date: '2026-06', title: 'Release 1.1.0', content: 'SEO 修复' },
+  { date: '2026-05', title: 'Release 1.0.0', content: '首个正式版本' },
+]" />
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `items` | `{ date, title, content }[]` | 必填 | 时间线条目，每项含日期、标题、内容 |
+
+### PixelProgress
+
+像素风格进度条，支持四种颜色和百分比显示。
+
+<PixelProgress :value="75" label="项目进度" show-value />
+<PixelProgress :value="60" color="success" label="已完成" show-value />
+<PixelProgress :value="30" color="warning" label="进行中" />
+<PixelProgress :value="90" color="danger" label="高风险" show-value />
+
+```html
+<PixelProgress :value="75" label="项目进度" show-value />
+<PixelProgress :value="60" color="success" label="已完成" show-value />
+<PixelProgress :value="30" color="warning" label="进行中" />
+<PixelProgress :value="90" color="danger" label="高风险" show-value />
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `number` | 必填 | 进度值 (0-100) |
+| `label` | `string` | `''` | 进度条标签 |
+| `color` | `'accent' \| 'success' \| 'warning' \| 'danger'` | `'accent'` | 颜色类型 |
+| `show-value` | `boolean` | `false` | 是否显示百分比 |
+| `height` | `string` | `'16px'` | 进度条高度 |
+
 ---
 
 ## `layout/` — 布局组件
@@ -165,19 +368,23 @@ const textareaText = ref('')
 
 ### HomeHero
 
-首页大图横幅，支持标题、副标题、描述、Logo 和自定义背景。
+首页大图横幅，支持标题、副标题、描述、Logo 和自定义背景。支持单图或轮播模式。
 
+> 此组件设计为全宽渲染，不适合在文档内容区直接预览。请在实际页面中使用。
+
+```html
+<!-- 单图模式 -->
 <HomeHero
   title="像素生态"
   subtitle="创意驱动的社区"
   description="一个像素风格的静态站点模板"
 />
 
-```html
+<!-- 轮播模式 -->
 <HomeHero
   title="像素生态"
-  subtitle="创意驱动的社区"
-  description="一个像素风格的静态站点模板"
+  :backgrounds="['/background/44.jpg', '/background/15.jpg', '/background/19.jpg']"
+  :interval="4000"
 />
 ```
 
@@ -187,7 +394,12 @@ const textareaText = ref('')
 | `subtitle` | `string` | `''` | 副标题 |
 | `description` | `string` | `''` | 描述文字 |
 | `logo` | `string` | `'/logo.png'` | Logo 图片路径 |
-| `background` | `string` | `''` | 背景图片路径（不设置则使用渐变背景） |
+| `background` | `string` | `''` | 单张背景图路径（不设置则使用渐变背景） |
+| `backgrounds` | `string[]` | `[]` | 多张背景图，传入后启用轮播模式 |
+| `interval` | `number` | `5000` | 自动切换间隔 (ms)，设为 0 停止自动切换 |
+| `transition` | `'fade' \| 'slide'` | `'fade'` | 轮播过渡效果 |
+
+> **注意**：`background` 和 `backgrounds` 互斥。传入 `backgrounds` 后 `background` 将被忽略。鼠标悬停 Hero 区域时轮播暂停。
 
 ### HomeIntro
 
@@ -257,6 +469,25 @@ const textareaText = ref('')
 ## `content/` — 内容组件
 
 用于展示结构化内容，如文章、卡片等。
+
+### PixelImage
+
+像素风格图片展示，支持懒加载和说明文字。
+
+<PixelImage src="/background/19.jpg" alt="示例图片" caption="像素风格图片说明文字" />
+
+```html
+<PixelImage src="/background/19.jpg" alt="示例图片" caption="说明文字" />
+```
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `src` | `string` | 必填 | 图片路径 |
+| `alt` | `string` | `''` | 替代文本 |
+| `caption` | `string` | `''` | 图片下方说明文字 |
+| `width` | `number` | `800` | 图片宽度 |
+| `height` | `number` | `600` | 图片高度 |
+| `lazy` | `boolean` | `true` | 是否懒加载 |
 
 ### NewsCard
 
