@@ -4,20 +4,18 @@ import PixelButtonClassic from './PixelButtonClassic.vue'
 
 const modelValue = defineModel<boolean>({ default: false })
 const emits = defineEmits(['confirm'])
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    cancelText?: string
+    confirmText?: string
+  }>(),
+  {
+    title: '',
+    cancelText: '取消',
+    confirmText: '确认',
   },
-  cancelText: {
-    type: String,
-    default: '取消',
-  },
-  confirmText: {
-    type: String,
-    default: '确认',
-  },
-})
+)
 const visible = ref(false)
 const opacity = ref(0)
 
@@ -53,15 +51,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="dialog-cover"
-    v-if="visible"
-    :style="{ opacity: opacity }"
-    @click.self="closeDialog"
-  >
+  <div v-if="visible" class="dialog-cover" :style="{ opacity: opacity }" @click.self="closeDialog">
     <div class="dialog pixel-border" @click.stop>
-      <text class="dialog-title" v-if="props.title.trim() !== ''">{{ props.title }}</text>
-      <slot></slot>
+      <text v-if="props.title.trim() !== ''" class="dialog-title">
+        {{ props.title }}
+      </text>
+      <slot />
       <slot name="footer">
         <div class="dialog-footer">
           <PixelButtonClassic class="dialog-footer-btn" @click="closeDialog">
@@ -122,7 +117,7 @@ onMounted(() => {
 
 .dialog-title {
   font-family: var(--pixel-font-heading);
-  font-size: 1.25rem;   /* 20px — Ark Pixel 对齐 */
+  font-size: 1.25rem; /* 20px — Ark Pixel 对齐 */
   font-weight: bold;
   margin-bottom: 1rem;
   user-select: none;

@@ -1,38 +1,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useData, useRoute, withBase } from 'vitepress'
+import { buildSidebarNav } from '../../utils/docs-nav'
+import { stripBase } from '../../utils/path'
 
 const { site } = useData()
 const route = useRoute()
 
-// VitePress SSR 期间 route.path 可能包含 base 前缀，手动剥离
-const stripBase = (path: string) => {
-  const base = site.value.base
-  if (base && base !== '/' && base !== './' && path.startsWith(base)) {
-    return path.slice(base.length - 1)
-  }
-  return path
-}
-
-// 硬编码导航结构（与 docs/ 目录对应）
-// 若文档增多，可改为从 themeConfig.sidebar 读取
-const nav = [
-  {
-    title: '入门指南',
-    items: [
-      { text: '快速开始', link: '/docs/quick-start' },
-      { text: '自定义', link: '/docs/customization' },
-      { text: '部署', link: '/docs/deployment' },
-    ],
-  },
-  {
-    title: '内容创作',
-    items: [
-      { text: '新闻指南', link: '/docs/news' },
-      { text: '组件参考', link: '/docs/components' },
-    ],
-  },
-]
+const nav = buildSidebarNav()
 
 const collapsed = ref<Record<string, boolean>>({})
 
@@ -41,7 +16,7 @@ const toggle = (title: string) => {
 }
 
 const isActive = (link: string) => {
-  const path = stripBase(route.path)
+  const path = stripBase(route.path, site.value.base)
   return path === link || path === link + '.html'
 }
 </script>
@@ -127,7 +102,9 @@ const isActive = (link: string) => {
   color: var(--pixel-color-text-muted);
   text-decoration: none;
   border-left: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .sidebar-item:hover {

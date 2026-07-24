@@ -1,4 +1,3 @@
-import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
 import Layout from './Layout.vue'
 
@@ -34,6 +33,7 @@ import NewsCard from './components/content/NewsCard.vue'
 import LinkCard from './components/content/LinkCard.vue'
 import PixelImage from './components/content/PixelImage.vue'
 import DocsSidebar from './components/content/DocsSidebar.vue'
+import PixelSearch from './components/content/PixelSearch.vue'
 import SiteFooter from './components/layout/SiteFooter.vue'
 
 export default {
@@ -62,6 +62,7 @@ export default {
     app.component('LinkCard', LinkCard)
     app.component('PixelImage', PixelImage)
     app.component('DocsSidebar', DocsSidebar)
+    app.component('PixelSearch', PixelSearch)
     app.component('SiteFooter', SiteFooter)
   },
 } satisfies Theme

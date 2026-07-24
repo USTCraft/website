@@ -1,28 +1,21 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-const props = defineProps({
-  value: {
-    type: Number,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    value: number
+    label?: string
+    color?: 'accent' | 'success' | 'warning' | 'danger'
+    showValue?: boolean
+    height?: string
+  }>(),
+  {
+    label: '',
+    color: 'accent',
+    showValue: false,
+    height: '16px',
   },
-  label: {
-    type: String,
-    default: '',
-  },
-  color: {
-    type: String as () => 'accent' | 'success' | 'warning' | 'danger',
-    default: 'accent',
-  },
-  showValue: {
-    type: Boolean,
-    default: false,
-  },
-  height: {
-    type: String,
-    default: '16px',
-  },
-})
+)
 
 const clampedValue = computed(() => Math.max(0, Math.min(100, props.value)))
 </script>
@@ -33,10 +26,7 @@ const clampedValue = computed(() => Math.max(0, Math.min(100, props.value)))
       <span v-if="label" class="pixel-progress__label">{{ label }}</span>
       <span v-if="showValue" class="pixel-progress__value">{{ clampedValue }}%</span>
     </div>
-    <div
-      class="pixel-progress__track"
-      :style="{ height: height }"
-    >
+    <div class="pixel-progress__track" :style="{ height: height }">
       <div
         class="pixel-progress__fill"
         :class="`pixel-progress__fill--${color}`"

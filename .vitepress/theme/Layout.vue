@@ -6,29 +6,21 @@ import SiteFooter from './components/layout/SiteFooter.vue'
 import ScrollToTop from './components/layout/ScrollToTop.vue'
 import ArticleView from './components/content/ArticleView.vue'
 import DocsSidebar from './components/content/DocsSidebar.vue'
+import { stripBase } from './utils/path'
 
 const { frontmatter, site } = useData()
 const route = useRoute()
 
-// VitePress SSR 期间 route.path 可能包含 base 前缀，手动剥离
-const stripBase = (path: string) => {
-  const base = site.value.base
-  if (base && base !== '/' && base !== './' && path.startsWith(base)) {
-    return path.slice(base.length - 1)
-  }
-  return path
-}
-
 const hasHero = computed(() => !!frontmatter.value.hasHero)
 
 const isNewsPost = computed(() => {
-  const path = stripBase(route.path)
+  const path = stripBase(route.path, site.value.base)
   return path.startsWith('/news/') && path !== '/news/' && path !== '/news'
 })
 
 // Docs sub-pages get a sidebar layout; /docs/ itself is the index (no sidebar)
 const isDocsPage = computed(() => {
-  const path = stripBase(route.path)
+  const path = stripBase(route.path, site.value.base)
   return path.startsWith('/docs/') && path !== '/docs/' && path !== '/docs'
 })
 
@@ -49,12 +41,12 @@ const articleProps = computed(() => {
 <template>
   <div class="pixel-layout">
     <NavBar />
-    <main class="main-content">
+    <main class="main-content" data-pagefind-body="1">
       <!-- Docs: sidebar stays static, only content transitions -->
       <div v-if="isDocsPage" class="docs-layout">
         <DocsSidebar />
         <Transition name="page" mode="out-in">
-          <div class="page-container vp-doc" :key="route.path">
+          <div :key="route.path" class="page-container vp-doc">
             <Content />
           </div>
         </Transition>
@@ -64,7 +56,12 @@ const articleProps = computed(() => {
         <ArticleView v-if="articleProps" v-bind="articleProps" :key="route.path">
           <Content />
         </ArticleView>
-        <div v-else class="page-container vp-doc" :class="{ 'with-hero': hasHero }" :key="route.path">
+        <div
+          v-else
+          :key="route.path"
+          class="page-container vp-doc"
+          :class="{ 'with-hero': hasHero }"
+        >
           <Content />
         </div>
       </Transition>

@@ -1,24 +1,19 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
+withDefaults(
+  defineProps<{
+    title: string
+    description?: string
+    image?: string
+    right?: boolean
+  }>(),
+  {
+    description: '',
+    image: '',
+    right: false,
   },
-  description: {
-    type: String,
-    default: '',
-  },
-  image: {
-    type: String,
-    default: '',
-  },
-  right: {
-    type: Boolean,
-    default: false,
-  },
-})
+)
 </script>
 
 <template>
@@ -30,7 +25,14 @@ defineProps({
       </div>
     </div>
     <div v-else :class="$props.right ? 'intro-left' : 'intro-right'">
-      <img :src="withBase($props.image)" alt="image" loading="lazy" class="intro-image pixel-border" width="600" height="338" />
+      <img
+        :src="withBase($props.image)"
+        alt="image"
+        loading="lazy"
+        class="intro-image pixel-border"
+        width="600"
+        height="338"
+      />
       <div class="intro-text">
         <p>{{ $props.title }}</p>
         <span>{{ $props.description }}</span>

@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
+import type { Author } from '../../types/components.ts'
 
 defineProps<{
   title?: string
-  author?: { name: string; avatar: string; tags?: { text: string; color: string; bg: string }[] }
+  author?: Author
   date?: string
   endDate?: string
   cover?: string
@@ -16,7 +17,9 @@ defineProps<{
     <!-- Cover -->
     <div v-if="cover" class="article-cover">
       <img :src="withBase(cover)" :alt="title" width="1200" height="384" />
-      <div v-if="category" class="article-cover-category">{{ category }}</div>
+      <div v-if="category" class="article-cover-category">
+        {{ category }}
+      </div>
     </div>
 
     <div class="article-body">
@@ -25,14 +28,17 @@ defineProps<{
         <div class="article-author-avatar pixel-border">
           <img :src="withBase(author.avatar)" :alt="author.name" width="64" height="64" />
         </div>
-        <div class="article-author-name">{{ author.name }}</div>
+        <div class="article-author-name">
+          {{ author.name }}
+        </div>
         <div v-if="author.tags" class="article-author-tags">
           <span
             v-for="tag in author.tags"
             :key="tag.text"
             class="article-author-tag"
             :style="{ backgroundColor: tag.bg, color: tag.color }"
-          >{{ tag.text }}</span>
+            >{{ tag.text }}</span
+          >
         </div>
         <div class="article-author-meta">
           <div v-if="date && !endDate">
@@ -48,7 +54,9 @@ defineProps<{
 
       <!-- Markdown content -->
       <main class="article-content">
-        <h1 v-if="title" class="article-title">{{ title }}</h1>
+        <h1 v-if="title" class="article-title">
+          {{ title }}
+        </h1>
         <div class="article-text vp-doc">
           <slot />
         </div>

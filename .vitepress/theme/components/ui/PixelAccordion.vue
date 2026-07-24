@@ -1,16 +1,15 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    title: string
+    open?: boolean
+  }>(),
+  {
+    open: false,
   },
-  open: {
-    type: Boolean,
-    default: false,
-  },
-})
+)
 
 const isOpen = ref(props.open)
 
@@ -21,7 +20,7 @@ function toggle() {
 
 <template>
   <div class="pixel-accordion" :class="{ 'pixel-accordion--open': isOpen }">
-    <button class="pixel-accordion__header" @click="toggle" :aria-expanded="isOpen">
+    <button class="pixel-accordion__header" :aria-expanded="isOpen" @click="toggle">
       <span class="pixel-accordion__arrow">{{ isOpen ? '▼' : '▶' }}</span>
       <span class="pixel-accordion__title">{{ title }}</span>
     </button>

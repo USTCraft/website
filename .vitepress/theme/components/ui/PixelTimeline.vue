@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-defineProps({
-  items: {
-    type: Array as () => { date: string; title: string; content: string }[],
-    required: true,
-  },
-})
+defineProps<{
+  items: { date: string; title: string; content: string }[]
+}>()
 </script>
 
 <template>
@@ -19,7 +16,9 @@ defineProps({
       <div class="pixel-timeline__card">
         <span class="pixel-timeline__date">{{ item.date }}</span>
         <span class="pixel-timeline__title">{{ item.title }}</span>
-        <p class="pixel-timeline__content">{{ item.content }}</p>
+        <p class="pixel-timeline__content">
+          {{ item.content }}
+        </p>
       </div>
     </div>
   </div>

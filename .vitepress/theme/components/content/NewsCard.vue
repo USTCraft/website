@@ -2,28 +2,20 @@
 import { withBase } from 'vitepress'
 import PixelButton3D from '../ui/PixelButton3D.vue'
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
+withDefaults(
+  defineProps<{
+    title: string
+    brief?: string
+    image?: string
+    link: string
+    buttonText?: string
+  }>(),
+  {
+    brief: '',
+    image: '',
+    buttonText: '阅读更多',
   },
-  brief: {
-    type: String,
-    default: '',
-  },
-  image: {
-    type: String,
-    default: '',
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-  buttonText: {
-    type: String,
-    default: '阅读更多',
-  },
-})
+)
 </script>
 
 <template>
@@ -39,11 +31,11 @@ defineProps({
     </picture>
     <div class="overview-content">
       <a :href="withBase($props.link)" class="overview-title">{{ $props.title }}</a>
-      <p class="overview-brief">{{ $props.brief }}</p>
+      <p class="overview-brief">
+        {{ $props.brief }}
+      </p>
       <a :href="withBase($props.link)" class="overview-button-wrap">
-        <PixelButton3D class="overview-button">
-          {{ $props.buttonText }} &gt;
-        </PixelButton3D>
+        <PixelButton3D class="overview-button"> {{ $props.buttonText }} &gt; </PixelButton3D>
       </a>
     </div>
   </div>
@@ -86,11 +78,11 @@ defineProps({
 
 .overview-title {
   font-family: var(--pixel-font-heading);
-  font-size: 1.25rem;   /* 20px — Ark Pixel 对齐 */
+  font-size: 1.25rem; /* 20px — Ark Pixel 对齐 */
   cursor: pointer;
   color: var(--pixel-color-text);
   text-decoration: none;
-  user-select: none;  
+  user-select: none;
   margin-bottom: 0.5rem;
 }
 

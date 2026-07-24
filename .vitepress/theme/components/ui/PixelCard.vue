@@ -2,24 +2,20 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    icon?: string
+    href?: string
+    hoverable?: boolean
+  }>(),
+  {
+    title: '',
+    icon: '',
+    href: '',
+    hoverable: true,
   },
-  icon: {
-    type: String,
-    default: '',
-  },
-  href: {
-    type: String,
-    default: '',
-  },
-  hoverable: {
-    type: Boolean,
-    default: true,
-  },
-})
+)
 
 const isLink = computed(() => !!props.href)
 const tag = computed(() => (isLink.value ? 'a' : 'div'))
@@ -48,8 +44,9 @@ const tag = computed(() => (isLink.value ? 'a' : 'div'))
   padding: 16px;
   text-decoration: none;
   color: var(--pixel-color-text);
-  transition: transform var(--pixel-transition-fast),
-              border-color var(--pixel-transition-fast);
+  transition:
+    transform var(--pixel-transition-fast),
+    border-color var(--pixel-transition-fast);
 }
 
 .pixel-card--hoverable:hover {

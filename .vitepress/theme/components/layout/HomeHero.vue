@@ -2,16 +2,28 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { withBase } from 'vitepress'
 
-const props = defineProps({
-  title: { type: String, default: 'Your Organization' },
-  subtitle: { type: String, default: '' },
-  description: { type: String, default: '' },
-  logo: { type: String, default: '/logo.png' },
-  background: { type: String, default: '' },
-  backgrounds: { type: Array as () => string[], default: () => [] },
-  interval: { type: Number, default: 5000 },
-  transition: { type: String as () => 'fade' | 'slide', default: 'fade' },
-})
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    subtitle?: string
+    description?: string
+    logo?: string
+    background?: string
+    backgrounds?: string[]
+    interval?: number
+    transition?: 'fade' | 'slide'
+  }>(),
+  {
+    title: 'Your Organization',
+    subtitle: '',
+    description: '',
+    logo: '/logo.png',
+    background: '',
+    backgrounds: () => [],
+    interval: 5000,
+    transition: 'fade',
+  },
+)
 
 // ── 轮播状态 ──
 const currentIndex = ref(0)
@@ -21,7 +33,9 @@ let observer: IntersectionObserver | null = null
 const heroRef = ref<HTMLElement | null>(null)
 
 const isCarousel = computed(() => props.backgrounds.length > 0)
-const images = computed(() => isCarousel.value ? props.backgrounds : (props.background ? [props.background] : []))
+const images = computed(() =>
+  isCarousel.value ? props.backgrounds : props.background ? [props.background] : [],
+)
 const total = computed(() => images.value.length)
 
 // ── 切换到指定索引 ──
@@ -29,7 +43,9 @@ function goTo(index: number) {
   if (isTransitioning.value || total.value <= 1) return
   isTransitioning.value = true
   currentIndex.value = index
-  setTimeout(() => { isTransitioning.value = false }, 800)
+  setTimeout(() => {
+    isTransitioning.value = false
+  }, 800)
 }
 
 // ── 下一张 ──
@@ -45,20 +61,33 @@ function startTimer() {
 }
 
 function stopTimer() {
-  if (timer) { clearInterval(timer); timer = null }
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
 }
 
 // ── 暂停 / 恢复 ──
-function pause() { stopTimer() }
-function resume() { startTimer() }
+function pause() {
+  stopTimer()
+}
+function resume() {
+  startTimer()
+}
 
 // ── 生命周期 ──
 onMounted(() => {
   startTimer()
   if (heroRef.value) {
     observer = new IntersectionObserver(
-      ([entry]) => { entry.isIntersecting ? resume() : pause() },
-      { threshold: 0.1 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          resume()
+        } else {
+          pause()
+        }
+      },
+      { threshold: 0.1 },
     )
     observer.observe(heroRef.value)
   }
@@ -103,14 +132,27 @@ onUnmounted(() => {
     </template>
 
     <!-- 无背景图时显示渐变 -->
-    <div v-if="images.length === 0" class="hero-gradient"></div>
+    <div v-if="images.length === 0" class="hero-gradient" />
 
     <div class="hero-overlay">
       <div class="logo-area">
-        <img v-if="$props.logo" :src="withBase($props.logo)" alt="logo" class="hero-logo" width="80" height="80" />
-        <h1 class="hero-title">{{ $props.title }}</h1>
-        <p v-if="$props.subtitle" class="hero-subtitle">{{ $props.subtitle }}</p>
-        <p v-if="$props.description" class="hero-desc">{{ $props.description }}</p>
+        <img
+          v-if="$props.logo"
+          :src="withBase($props.logo)"
+          alt="logo"
+          class="hero-logo"
+          width="80"
+          height="80"
+        />
+        <h1 class="hero-title">
+          {{ $props.title }}
+        </h1>
+        <p v-if="$props.subtitle" class="hero-subtitle">
+          {{ $props.subtitle }}
+        </p>
+        <p v-if="$props.description" class="hero-desc">
+          {{ $props.description }}
+        </p>
       </div>
     </div>
   </div>
