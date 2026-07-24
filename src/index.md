@@ -4,32 +4,38 @@ hasHero: true
 ---
 
 <HomeHero
-  title="像素生态"
-  subtitle="创意驱动的社区"
-  description="构建一个创意与技术交融的活力社区。我们营造包容的环境，让每个人都能学习、协作、成长。"
+  title="USTCraft"
+  subtitle="像素艺术小组"
+  description="探索 Minecraft 与学科交叉的各种可能，构建创意与技术交融的活力社区。"
   logo="/logo.png"
   :backgrounds="['/background/44.jpg', '/background/15.jpg', '/background/19.jpg']"
   :interval="4000"
 />
 
 
-
 <HomeIntro
-  title="创造精彩"
-  description="从创意项目到技术创新——我们的社区成员不断突破想象的边界。分享你的作品，从他人那里获得灵感。"
-  image="/background/44.jpg"
+  title="USTCMC 社区"
+  description="十余年来，USTC Minecraft 社区以推动服务器周目为主线，探索原版生存、特色模组玩法、虚拟社区建设等内容，并穿插小游戏、建筑复刻、社区比赛等特色项目，成为科大「规模最大」「技术浓度最高」的「游戏」类群聊。"
+  image="/background/19.jpg"
 />
 
 <HomeIntro
-  title="学习与分享"
-  description="参加工作坊、教程和社区活动。无论你是新手还是资深创作者，总有新东西等着你去发现。"
-  image="/background/15.jpg"
+  title="USTCraft 社团"
+  description="由科大 Minecraft 爱好者们组织而成的院级社团，于 2025 年 12 月宣告成立。"
+  image="/background/44.jpg"
   :right="true"
 />
 
 <HomeIntro
-  title="加入社区"
-  description="结识志同道合的创作者。协作项目、交流想法，在我们温暖的社区中建立持久的友谊。"
-  image="/background/19.jpg"
+  title="方块科大"
+  description="利用 Minecraft 还原和创造科大的校园景观，展示科大的历史文化和创新精神，增进科大人之间的交流与互动"
+  image="/background/15.jpg"
 />
 
+<HomeIntro
+  title="了解更多"
+  description=
+  "点击上方导航栏的「关于」了解更多关于 USTCraft 的信息，点击「文档」以加入我们，畅玩服务器~"
+  image="/background/19.jpg"
+  :right="true"
+/>

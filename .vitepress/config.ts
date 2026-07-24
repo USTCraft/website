@@ -6,10 +6,10 @@ import { RssPlugin } from 'vitepress-plugin-rss'
 // ============================================================
 const GITHUB_USERNAME = 'ustcraft'
 const REPO_NAME = 'website'
-const SITE_TITLE = 'USTCraft 像素艺术社'
-const SITE_DESCRIPTION = '从 Minecraft 等优秀作品出发，探索更广泛的像素艺术世界。'
-const SITE_AUTHOR = 'USTCraft 运营小组'
-const SITE_NAME_OG = 'USTCraft 像素艺术社'
+const SITE_TITLE = 'USTCraft 像素艺术小组'
+const SITE_DESCRIPTION = '探索 Minecraft 与学科交叉的各种可能'
+const SITE_AUTHOR = 'USTCraft 技术部'
+const SITE_NAME_OG = 'USTCraft 像素艺术小组'
 const COPYRIGHT_TEXT = '© 2026-Present USTCraft. 保留所有权利。'
 
 // ============================================================
@@ -147,7 +147,12 @@ export default defineConfig({
         icon: 'github',
         link: GITHUB_URL,
         text: '仓库地址',
-      } as any, // eslint-disable-line @typescript-eslint/no-explicit-any
+      } as any,
+      {
+        icon: 'bilibili',
+        link: 'https://space.bilibili.com/3546788017474530',
+        text: 'Bilibili',
+      } as any,
     ],
     footer: {
       copyright: COPYRIGHT_TEXT,

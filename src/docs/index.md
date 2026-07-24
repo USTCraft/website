@@ -10,7 +10,7 @@ const cards = buildDocCards()
 
 # 文档
 
-这里包含使用和自定义本模板所需的一切内容。所有文档均为标准 Markdown 文件 — 直接在 `docs/` 目录中编辑即可。
+欢迎来到 USTCraft 主页文档站。这里精选的文档涵盖面向新玩家的服务器游玩指南、社区历史记录以及社团事务档案，帮助你快速融入 USTC Minecraft 社区。
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 2rem 0;">
 
