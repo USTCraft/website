@@ -5,7 +5,7 @@ sidebarGroup: 关于我们
 sidebarGroupOrder: 2
 sidebarOrder: 2
 cardDescription: 诚邀各位有志之士加入我们，make USTCMC great again！（
-cardImage: /background/19.jpg
+cardImage: /background/group/ustcraft.jpg
 ---
 
 # 加入我们

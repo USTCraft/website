@@ -1,6 +1,6 @@
-# Pixel Eco 模板
+# USTCraft 像素艺术小组官网
 
-基于 VitePress 的像素风格静态站点模板，内置像素 UI 组件。适用于社区门户、组织主页、创意项目展示等场景。
+基于 VitePress 的 USTCraft 像素艺术小组官方网站。站点包含首页、关于页、新闻动态、文档中心等模块，采用像素风格 UI 设计。
 
 ## 技术栈
 
@@ -10,48 +10,79 @@
 | 语言 | TypeScript 5.8                                        |
 | 输出 | 纯静态 HTML/CSS/JS                                    |
 | 字体 | Ark Pixel（标题）+ Monocraft（代码）+ Unifont（正文） |
+| 搜索 | Pagefind                                              |
+| RSS  | vitepress-plugin-rss                                  |
 
 ## 快速开始
 
 ```bash
 # 克隆仓库
-git clone https://github.com/Lylighte/pixel-eco.git
-cd pixel-eco
+git clone https://github.com/USTCraft/website.git
+cd website
 
 # 安装依赖
 npm install
 
 # 启动开发服务器
 npm run dev
-```
+# 浏览器打开 `http://localhost:5173` 即可看到像素风格首页。
 
-浏览器打开 `http://localhost:5173` 即可看到像素风格首页。
-
-```bash
 # 构建生产版本
 npm run build
 
-# 本地预览构建结果（见后文）
+# 本地预览构建结果
 npm run preview
+
+# 通过环境变量控制部署路径：
+# 根路径部署 https://ustcraft.github.io/
+npm run build
+
+# 子路径部署 https://example.com/website/
+BASE_PATH=/website/ SITE_URL=https://example.com/website/ npm run build
 ```
 
 ## 项目结构
 
 ```
-pixel-eco/
+website/
 ├── src/                       # 内容源文件
-│   ├── index.md               # 首页
+│   ├── index.md               # 首页（Hero + 特色栏目）
 │   ├── about.md               # 关于页
 │   ├── 404.md                 # 404 页面
+│   ├── search.md              # 站内搜索页
 │   ├── news/                  # 新闻文章
+│   │   ├── index.md           # 新闻列表页
+│   │   ├── 2026-02-inchworld.md
+│   │   ├── 2026-04-carnival.md
+│   │   └── draft-demo.md      # 草稿示例（draft: true）
 │   ├── docs/                  # 文档页面
+│   │   ├── index.md           # 文档中心
+│   │   ├── quick-start.md     # 快速开始
+│   │   └── joinus.md          # 加入我们
 │   └── public/                # 静态资源
 │       ├── logo.png           # 站点 Logo（主）
 │       ├── logo.svg           # 站点 Logo（设计源文件）
 │       ├── favicon.ico        # 浏览器图标
 │       ├── 404.png            # 404 页面图片
-│       ├── button.click.ogg   # 按钮点击音效
-│       ├── background/        # 背景图片
+│       ├── avatar/            # 1:1 头像资源
+│       │   ├── github.png
+│       │   ├── st.png
+│       │   └── ustcmc-logo.png
+│       ├── background/        # 通用大图（背景/封面/卡片配图）
+│       │   ├── 15.jpg
+│       │   ├── 19.jpg
+│       │   ├── 28.jpg
+│       │   ├── 44.jpg
+│       │   ├── bgbtn.png
+│       │   ├── 101/           # 101 主题
+│       │   ├── cube/          # 方块科大
+│       │   ├── general/       # 通用配图
+│       │   ├── group/         # 社团合影
+│       │   ├── mysterious/    # 神秘主题
+│       │   └── news/          # 新闻封面
+│       ├── static/            # 行文配图（按年/月组织）
+│       │   └── 2026/
+│       │       └── 07/        # 2026年7月文章配图
 │       └── fonts/             # 像素字体文件
 ├── .vitepress/
 │   ├── config.ts              # 站点配置（标题、导航等）
@@ -62,38 +93,40 @@ pixel-eco/
 │       │   ├── ui/            # 按钮、输入框、对话框
 │       │   ├── layout/        # Hero、页脚、返回顶部
 │       │   └── content/       # 卡片、侧边栏
+│       ├── utils/             # 工具函数
+│       │   ├── news-utils.ts  # 新闻卡片构建
+│       │   └── docs-nav.ts    # 文档导航构建
 │       └── styles/            # CSS 变量、字体、动画
 ├── package.json
 ├── tsconfig.json
+├── vitest.config.ts
+├── eslint.config.js
+├── pagefind.json
 └── README.md
 ```
 
-## 自定义
+## 编写约定
 
-### 基本设置
+### 图片资源约定
 
-编辑 `.vitepress/config.ts` 修改站点标题、描述和导航：
+网站图片按用途分类存放，遵循以下约定：
 
-```ts
-export default defineConfig({
-  title: '像素生态',
-  description: '创意驱动的社区',
-  // ...
-})
-```
+| 目录 | 用途 | 说明 |
+| ---- | ---- | ---- |
+| `src/public/background/` | 通用大图 | 首页 Hero 背景、卡片封面、栏目配图等大尺寸图片 |
+| `src/public/avatar/` | 1:1 头像 | 社交平台链接、作者头像等正方形头像（建议 1:1 比例） |
+| `src/public/static/` | 行文配图 | 文章正文中的插图，按 `年/月/` 组织（如 `static/2026/07/`） |
 
-### 替换资源
+**background 子目录说明：**
 
-| 文件                              | 用途                     |
-| --------------------------------- | ------------------------ |
-| `src/public/logo.png`             | 站点 Logo（主，192×192） |
-| `src/public/logo.svg`             | 站点 Logo（设计源文件）  |
-| `src/public/favicon.ico`          | 浏览器标签页图标         |
-| `src/public/background/15.jpg`    | 首页 / 关于页配图        |
-| `src/public/background/19.jpg`    | 首页特色栏目配图         |
-| `src/public/background/28.jpg`    | 新闻 / 文档卡片配图      |
-| `src/public/background/44.jpg`    | 首页 / 新闻卡片配图      |
-| `src/public/background/bgbtn.png` | Classic 按钮纹理         |
+| 子目录 | 用途 |
+| ------ | ---- |
+| `background/101/` | 101 主题配图 |
+| `background/cube/` | 方块科大相关 |
+| `background/general/` | 通用配图（首页栏目、关于页等） |
+| `background/group/` | 社团配图 |
+| `background/mysterious/` | 神秘主题配图 |
+| `background/news/` | 新闻文章封面图 |
 
 ### 编辑内容
 
@@ -101,26 +134,33 @@ export default defineConfig({
 
 | 文件                           | 内容                    |
 | ------------------------------ | ----------------------- |
-| `src/index.md`                 | 首页（Hero + 特色栏目） |
+| `src/index.md`                 | 首页（Hero + 特色栏目）  |
 | `src/about.md`                 | 关于页面                |
+| `src/search.md`                | 站内搜索页              |
+| `src/404.md`                   | 404 页面                |
 | `src/news/index.md`            | 新闻列表                |
-| `src/news/welcome.md`          | 示例新闻文章            |
-| `src/news/community-update.md` | 示例新闻文章            |
+| `src/news/*.md`                | 新闻内容                |
 | `src/docs/index.md`            | 文档中心                |
+| `src/docs/*.md`                | 文档内容                |
 
 ### 添加新闻
 
-在 `src/news/` 目录下新建 `.md` 文件，添加 frontmatter：
+在 `src/news/` 目录下新建 `.md` 文件，**文件名遵循 `年份-月份-关键词.md` 格式**（如 `2026-02-inchworld.md`、`2026-04-carnival.md`），并添加 frontmatter，例如：
 
 ```md
 ---
 title: 我的新文章
-date: 2025-07-01
+date: 2026-07-01
 author:
   name: 作者名
-  avatar: /background/44.jpg
-cover: /background/44.jpg
-category: 公告
+  avatar: /logo.png
+  tags:
+    - text: 活动
+      color: '#fff'
+      bg: '#1296db'
+cover: /background/news/xxx.jpg
+category: 新闻
+brief: 文章摘要，将显示在新闻卡片上
 ---
 
 # 我的新文章
@@ -128,7 +168,30 @@ category: 公告
 正文内容……
 ```
 
-确保 frontmatter 中包含 `brief` 字段，文章将自动出现在新闻列表页。
+**新闻写作约定：**
+
+1. **文件名**：`年份-月份-关键词.md`，如 `2026-02-inchworld.md`
+2. **封面图**：通用大图放 `background/news/`，1:1 头像放 `avatar/`，行文配图放 `static/年/月/`
+3. **`brief` 字段**：必填，显示在新闻卡片上，无 `brief` 的文章不会出现在列表页
+4. **`draft` 字段**：可选，设为 `true` 时仅在开发环境可见，生产构建自动隐藏
+5. **`cover` 字段**：文章封面图路径，建议使用 `background/news/` 下的图片
+6. **`author.tags`**：可选，用于在文章头部显示标签（如「活动」「公告」）
+7. **排序**：按 `date` 字段降序排列，最新的文章排在最前
+
+**草稿示例：**
+
+```md
+---
+title: 草稿标题
+date: 2026-07-01
+cover: /background/19.jpg
+category: 公告
+brief: 这是一篇草稿。
+draft: true
+---
+```
+
+发布时移除 `draft: true` 或将值改为 `false`。
 
 ### CSS 变量
 
@@ -180,7 +243,9 @@ category: 公告
 | `PixelInput`         | 像素风格文本输入框             |
 | `PixelTextarea`      | 像素风格多行文本框             |
 | `PixelDialog`        | 模态对话框                     |
-| `HomeHero`           | 首页大图横幅                   |
+| `PixelSearch`        | 站内搜索组件（集成 Pagefind）  |
+| `PixelImage`         | 像素风格图片（带 caption）     |
+| `HomeHero`           | 首页大图横幅（支持多背景轮播） |
 | `HomeIntro`          | 首页图文介绍（支持左右布局）   |
 | `SiteFooter`         | 全站页脚（由 Layout 自动渲染） |
 | `NewsCard`           | 新闻卡片                       |
@@ -191,40 +256,38 @@ category: 公告
 
 详见 [组件参考](/docs/components)。
 
-## 构建与部署
+### 搜索索引
+
+构建后自动通过 Pagefind 生成搜索索引（`postbuild` 脚本）：
 
 ```bash
-npm run build      # 构建生产版本
-npm run preview    # 本地预览构建结果
+npm run build      # 构建 + 生成搜索索引
 ```
 
-构建产物在 `.vitepress/dist/`，可部署到任意静态托管服务。
+### RSS
 
-### 自定义域名 + Nginx
+新闻列表自动生成 RSS Feed，由 `vitepress-plugin-rss` 提供支持。
 
-通过环境变量控制部署路径：
+## 项目维护
 
-```bash
-# 根路径部署 https://example.com/
-npm run build
+### 可用脚本
 
-# 子路径部署 https://example.com/pixel-eco/
-BASE_PATH=/pixel-eco/ SITE_URL=https://example.com/pixel-eco/ npm run build
-```
-
-Nginx 配置示例及完整部署流程见 [部署指南](https://github.com/Lylighte/pixel-eco/blob/dev/dev-notes/deployment-guide.md)。
-
-### 平台部署
-
-| 平台             | 说明                                                   |
-| ---------------- | ------------------------------------------------------ |
-| GitHub Pages     | 通过 `actions/configure-pages@v4` 自动注入 `BASE_PATH` |
-| Netlify / Vercel | 设置 `BASE_PATH` 和 `SITE_URL` 环境变量                |
-| 自有服务器       | 参考上方 Nginx 配置                                    |
+| 命令                    | 说明                   |
+| ----------------------- | ---------------------- |
+| `npm run dev`           | 启动开发服务器         |
+| `npm run build`         | 构建生产版本           |
+| `npm run preview`       | 本地预览构建结果       |
+| `npm run typecheck`     | TypeScript 类型检查    |
+| `npm run lint`          | ESLint 代码检查        |
+| `npm run lint:fix`      | ESLint 自动修复        |
+| `npm run format`        | Prettier 格式化        |
+| `npm run format:check`  | Prettier 格式检查      |
+| `npm run test`          | 运行测试               |
+| `npm run test:watch`    | 监听模式运行测试       |
 
 ## 项目起源
 
-本模板最初源自一个 Minecraft 社区门户项目，灵感来源于 [neco](https://github.com/RandomLemon/neco)。经过多阶段重构转型为通用像素风格静态站点模板。感谢所有开源依赖的作者和贡献者。
+本网站为 USTCraft 像素艺术小组（中国科学技术大学集成电路学院学生像素艺术研究小组）的官方网站，基于 [pixel-eco](https://github.com/Lylighte/pixel-eco) 模板构建。
 
 ## 许可证
 

@@ -23,7 +23,7 @@ const iconNames: Record<string, string> = {
   <div class="footer-area">
     <div class="footer-description">
       <p class="footer-name">
-        {{ site.title || '像素生态' }}
+        {{ site.title || 'USTCraft 像素艺术小组' }}
       </p>
       <span>{{ site.description || '' }}</span>
       <span v-if="theme.footer?.copyright" id="copyright">
@@ -31,9 +31,9 @@ const iconNames: Record<string, string> = {
       </span>
       <span v-else id="copyright"> © {{ new Date().getFullYear() }} - 保留所有权利 </span>
       <span id="declaration">
-        主题
+        基于
         <a href="https://github.com/Lylighte/pixel-eco" target="_blank" rel="noopener">Pixel Eco</a>
-        灵感来源于
+        主题构建，灵感来源于
         <a href="https://github.com/RandomLemon/neco" target="_blank" rel="noopener">neco</a>。感谢
         <span class="highlight-name">int15</span> 与
         <span class="highlight-name">kingcq</span> 的贡献。

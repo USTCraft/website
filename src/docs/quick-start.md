@@ -5,7 +5,7 @@ sidebarGroup: 入门指南
 sidebarGroupOrder: 1
 sidebarOrder: 1
 cardDescription: 从下载 Java 和启动器开始，配置外置登录，加入 USTC 服务器游玩。
-cardImage: /background/19.jpg
+cardImage: /background/44.jpg
 ---
 
 # 启动 Minecraft 
