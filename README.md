@@ -35,12 +35,8 @@ npm run build
 # 本地预览构建结果
 npm run preview
 
-# 通过环境变量控制部署路径：
-# 根路径部署 https://ustcraft.github.io/
-npm run build
-
-# 子路径部署 https://example.com/website/
-BASE_PATH=/website/ SITE_URL=https://example.com/website/ npm run build
+# 指定实际域名构建（POSIX shell 示例）
+SITE_URL=https://example.com/ npm run build
 ```
 
 ## 编写约定
@@ -49,37 +45,37 @@ BASE_PATH=/website/ SITE_URL=https://example.com/website/ npm run build
 
 网站图片按用途分类存放，遵循以下约定：
 
-| 目录 | 用途 | 说明 |
-| ---- | ---- | ---- |
-| `src/public/background/` | 通用大图 | 首页 Hero 背景、卡片封面、栏目配图等大尺寸图片 |
-| `src/public/avatar/` | 1:1 头像 | 社交平台链接、作者头像等正方形头像（建议 1:1 比例） |
-| `src/public/static/` | 行文配图 | 文章正文中的插图，按 `年/月/` 组织（如 `static/2026/07/`） |
+| 目录                     | 用途     | 说明                                                       |
+| ------------------------ | -------- | ---------------------------------------------------------- |
+| `src/public/background/` | 通用大图 | 首页 Hero 背景、卡片封面、栏目配图等大尺寸图片             |
+| `src/public/avatar/`     | 1:1 头像 | 社交平台链接、作者头像等正方形头像（建议 1:1 比例）        |
+| `src/public/static/`     | 行文配图 | 文章正文中的插图，按 `年/月/` 组织（如 `static/2026/07/`） |
 
 **background 子目录说明：**
 
-| 子目录 | 用途 |
-| ------ | ---- |
-| `background/101/` | 101 主题配图 |
-| `background/cube/` | 方块科大相关 |
-| `background/general/` | 通用配图（首页栏目、关于页等） |
-| `background/group/` | 社团配图 |
-| `background/mysterious/` | 神秘主题配图 |
-| `background/news/` | 新闻文章封面图 |
+| 子目录                   | 用途                           |
+| ------------------------ | ------------------------------ |
+| `background/101/`        | 101 主题配图                   |
+| `background/cube/`       | 方块科大相关                   |
+| `background/general/`    | 通用配图（首页栏目、关于页等） |
+| `background/group/`      | 社团配图                       |
+| `background/mysterious/` | 神秘主题配图                   |
+| `background/news/`       | 新闻文章封面图                 |
 
 ### 编辑内容
 
 所有页面内容均为 Markdown 文件，存放在 `src/` 目录：
 
-| 文件                           | 内容                    |
-| ------------------------------ | ----------------------- |
-| `src/index.md`                 | 首页（Hero + 特色栏目）  |
-| `src/about.md`                 | 关于页面                |
-| `src/search.md`                | 站内搜索页              |
-| `src/404.md`                   | 404 页面                |
-| `src/news/index.md`            | 新闻列表                |
-| `src/news/*.md`                | 新闻内容                |
-| `src/docs/index.md`            | 文档中心                |
-| `src/docs/*.md`                | 文档内容                |
+| 文件                | 内容                    |
+| ------------------- | ----------------------- |
+| `src/index.md`      | 首页（Hero + 特色栏目） |
+| `src/about.md`      | 关于页面                |
+| `src/search.md`     | 站内搜索页              |
+| `src/404.md`        | 404 页面                |
+| `src/news/index.md` | 新闻列表                |
+| `src/news/*.md`     | 新闻内容                |
+| `src/docs/index.md` | 文档中心                |
+| `src/docs/*.md`     | 文档内容                |
 
 ### 添加新闻
 
@@ -196,6 +192,61 @@ website/
 ```
 
 ## 配置与开发
+
+### 分支职责
+
+- `website`：社团官网分支，也是当前远程默认分支，负责主页内容、站点配置和部署。
+- `main`：保留较早的模板及合并历史，目前落后于 `website`，不作为官网部署源。
+- [Pixel Eco 上游](https://github.com/Lylighte/pixel-eco)：负责主题、组件和通用模板功能。本项目复用 `.vitepress/theme/`，模板修改应提交至上游。
+
+### 云服务器部署
+
+构建产物位于 `.vitepress/dist/`。仓库已移除 GitHub Pages 工作流，部署由本机执行。需要 Node.js、OpenSSH（`ssh`、`scp`）和 `tar`；服务器需支持 Linux `tar`、符号链接与 GNU `mv`。
+
+连接信息仅从本机环境变量和本机 OpenSSH 配置读取。**不得向仓库提交 SSH 配置、私钥、口令或包含实际连接信息的部署文件。** 私钥有口令时，可先在本机用 `ssh-add` 解锁，也可由 OpenSSH 在终端交互询问；脚本不收集口令。
+
+在 PowerShell 中为当前终端设置以下变量，值由维护者填写：
+
+```powershell
+$env:DEPLOY_HOST = '<本机 SSH 别名>'
+$env:DEPLOY_DIR = '<服务器专用站点绝对目录>'
+$env:SITE_URL = 'https://example.com/'
+$env:BASE_PATH = '/'
+npm run deploy -- --dry-run
+npm run deploy
+```
+
+`SITE_URL` 必须使用实际访问地址，路径与 `BASE_PATH` 一致并带尾部斜杠。子目录部署时，两者分别形如 `https://example.com/website/` 和 `/website/`。不设置 `SITE_URL` 的本地构建不生成 canonical、sitemap 或 RSS，避免指向旧 Pages 域名。
+
+脚本先构建（包含 Pagefind），打包并通过 SCP 上传到专用目录下的 `releases/`，校验 `index.html` 后原子切换 `current` 符号链接。失败时保留原有 `current`；旧版本保留以便回滚，不自动清理。部署账户需要该目录的写权限。Web 服务的站点根目录应指向 `<部署目录>/current`；已有站点先另行配置专用目录，脚本拒绝覆盖普通文件或目录形式的 `current`。
+
+Caddy 部署本站时，在现有 Caddyfile 中合并以下站点配置；实际部署目录为 `/var/www/portal.gpa.ac.cn/`，站点根目录指向其中的 `current`。部署前先检查现有配置，避免重复添加同名站点。部署账户需有目录写权限，Caddy 服务账户需有目录遍历和文件读取权限。
+
+```caddyfile
+portal.gpa.ac.cn {
+    root * /var/www/portal.gpa.ac.cn/current
+    encode zstd gzip
+    try_files {path} {path}.html {path}/
+    file_server
+    handle_errors {
+        @notFound expression {err.status_code} == 404
+        handle @notFound {
+            rewrite * /404.html
+            file_server
+        }
+    }
+}
+```
+
+静态文件与无扩展名页面的解析方式参见 [Caddy file_server](https://caddyserver.com/docs/caddyfile/directives/file_server) 和 [try_files](https://caddyserver.com/docs/caddyfile/directives/try_files)。先用 `caddy validate --config /etc/caddy/Caddyfile` 校验完整配置，再通过现有服务管理方式重载。本站构建时使用 `SITE_URL=https://portal.gpa.ac.cn/` 和 `BASE_PATH=/`。
+
+启用服务器站点并确认可访问后，在 GitHub 仓库 **Settings → Pages → Unpublish site** 停用旧 Pages 站点；删除工作流本身不会停用已经发布的站点。代码变更需要推送到 `website` 后才会从远程仓库移除工作流。
+
+### 学院新闻同步
+
+近期小组活动从 [学院新闻](https://sme.ustc.edu.cn/xyxw/list.htm) 核对后，以新闻摘要同步到 `src/news/`，保留学院发布日期、原稿署名和完整报道链接。首页复用现有新闻卡片，自动展示日期最新的三篇；新闻列表、站内搜索随构建更新。当前同步为人工核对后的静态内容，不会在访客浏览时请求学院网站。
+
+同步时仅选择与 USTCraft / 像素艺术小组有关的新闻，避免引入全院无关稿件。现有封面配图不是该报道现场照片，文章已标明；活动原图请见学院原文。
 
 CSS 变量、字体方案、内置组件等模板配置与开发相关内容，请移步 [Pixel Eco 模板仓库](https://github.com/Lylighte/pixel-eco) 查看。
 

@@ -13,12 +13,11 @@ const SITE_NAME_OG = 'USTCraft 像素艺术小组'
 const COPYRIGHT_TEXT = '© 2026-Present USTCraft. 保留所有权利。'
 
 // ============================================================
-// 二、部署路径 — 通常无需修改
+// 二、部署路径 — 云服务器部署通过环境变量配置
 // ============================================================
 // Dev 模式强制 '/'（避免相对路径导航嵌套 bug）
 // 默认 '/'，本地开发、预览、根路径部署均正常
-// CI 部署时通过环境变量 BASE_PATH 覆盖（如 /pixel-eco/）
-// configure-pages@v4 返回无尾部斜杠，此处强制补齐
+// 子目录部署时通过环境变量 BASE_PATH 覆盖，并补齐尾部斜杠
 const IS_DEV = process.argv[2] === 'dev'
 const BASE_PATH = IS_DEV ? '/' : (process.env.BASE_PATH || '/').replace(/\/?$/, '/')
 const IS_RELATIVE = BASE_PATH === './'
@@ -26,13 +25,11 @@ const IS_RELATIVE = BASE_PATH === './'
 const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}`
 
 // 非 relative 模式下推导 SITE_URL（用于 SEO/OG/sitemap）
-// 可通过 SITE_URL 环境变量覆盖，否则按 GitHub Pages 惯例推导
-const SITE_URL = IS_RELATIVE
-  ? ''
-  : process.env.SITE_URL || `https://${GITHUB_USERNAME}.github.io${BASE_PATH}`
+// 未设置实际域名时，不生成指向错误域名的 SEO / sitemap / RSS
+const SITE_URL = IS_RELATIVE ? '' : process.env.SITE_URL?.replace(/\/?$/, '/') || ''
 
 // RSS baseUrl 只需域名，不含子路径（插件内部处理 base）
-const RSS_BASE = IS_RELATIVE ? '' : `https://${GITHUB_USERNAME}.github.io`
+const RSS_BASE = SITE_URL && SITE_URL !== '/' ? new URL(SITE_URL).origin : ''
 
 // ============================================================
 // 三、VitePress 配置

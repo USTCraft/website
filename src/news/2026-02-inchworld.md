@@ -3,7 +3,7 @@ title: 「方寸天地」Minecraft 建筑征集 - 第一弹
 date: 2026-03-31
 author:
   name: USTCraft
-  avatar: /logo.png
+  avatar: /logo-borderless.png
   tags:
     - text: 活动
       color: '#fff'

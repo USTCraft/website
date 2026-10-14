@@ -3,7 +3,7 @@ title: 书院嘉年华「合」作共赢 - 像素艺术小组摊位回顾
 date: 2026-04-20
 author:
   name: USTCraft
-  avatar: /logo.png
+  avatar: /logo-borderless.png
   tags:
     - text: 活动
       color: '#fff'

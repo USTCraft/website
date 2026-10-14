@@ -8,6 +8,7 @@
     "build": "vitepress build",
     "postbuild": "pagefind --site .vitepress/dist",
     "preview": "vitepress preview",
+    "deploy": "node scripts/deploy.mjs",
     "build:search": "npm run build && npm run preview",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
@@ -15,6 +16,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
+    "test:deploy": "node --test scripts/deploy.test.mjs",
     "test:watch": "vitest"
   },
   "dependencies": {

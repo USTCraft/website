@@ -13,6 +13,26 @@ hasHero: true
 />
 
 
+## 最新新闻
+
+<script setup>
+import { buildNewsCards } from '../.vitepress/theme/utils/news-utils'
+
+const latestNews = buildNewsCards().slice(0, 2)
+</script>
+
+<NewsCard
+  v-for="card in latestNews"
+  :key="card.link"
+  :title="card.title"
+  :brief="card.brief"
+  :image="card.image"
+  :link="card.link"
+/>
+
+[查看全部新闻 →](/news/)
+
+
 <HomeIntro
   title="USTCMC 社区"
   description="十余年来，USTC Minecraft 社区以推动服务器周目为主线，探索原版生存、特色模组玩法、虚拟社区建设等内容，并穿插小游戏、建筑复刻、社区比赛等特色项目，成为科大「规模最大」「技术浓度最高」的「游戏」类群聊。"
